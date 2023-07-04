@@ -4,18 +4,18 @@ import Navbar from "../components/Navbar/Navbar";
 
 const routerConfig = [
   {
-    pathname: "/franchisee/home",
-    name: "Home",
+    pathname: "/franchisor/dashboard",
+    name: "Dashboard",
   },
   {
-    pathname: "connect",
+    pathname: "/connect",
     name: "Connect",
   },
 ];
 
 
 
-const FranchiseeLayout = (props) => {
+const FranchisorLayout = (props) => {
   return (
     <div className="w-full h-screen md:overflow-hidden bg-slate-200">
      <Navbar routerConfig={routerConfig}/>
@@ -27,4 +27,4 @@ const FranchiseeLayout = (props) => {
   );
   };
 
-export default FranchiseeLayout;
+export default FranchisorLayout;

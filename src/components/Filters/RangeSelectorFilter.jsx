@@ -37,9 +37,23 @@ const MultiRangeSlider = ({ min, max, onChange, className}) => {
   }, [maxVal, getPercent]);
 
   // Get min and max values when their state changes
-  useEffect(() => {
-    onChange({ min: minVal, max: maxVal });
-  }, [minVal, maxVal, onChange]);
+  // useEffect(() => {
+  //   onChange({ min: minVal, max: maxVal });
+  // }, [minVal, maxVal, onChange]);
+
+  function setExtremes(setState,value, isMin)
+  {
+     if(isMin)
+     {
+      if(value < min)
+        setState(min);
+     }
+     else
+     {
+      if(value > max)
+        setState(max);
+     }
+  }
 
   return (
     <div className={`container ${className}`}>
@@ -49,9 +63,11 @@ const MultiRangeSlider = ({ min, max, onChange, className}) => {
         max={max}
         value={minVal}
         onChange={(event) => {
-          const value = Math.min(Number(event.target.value), maxVal - 1);
-          setMinVal(value);
-          minValRef.current = value;
+          setMinVal((prevMinVal) => {
+            const value = Math.min(Number(event.target.value), maxVal - 1);
+            minValRef.current = value;
+            return value;
+          });
         }}
         className="thumb thumb--left"
         style={{ zIndex: minVal > max - 100 && "5" }}
@@ -62,9 +78,11 @@ const MultiRangeSlider = ({ min, max, onChange, className}) => {
         max={max}
         value={maxVal}
         onChange={(event) => {
-          const value = Math.max(Number(event.target.value), minVal + 1);
-          setMaxVal(value);
-          maxValRef.current = value;
+          setMaxVal((prevMaxVal) => {
+            const value = Math.max(Number(event.target.value), minVal + 1);
+            maxValRef.current = value;
+            return value;
+          });
         }}
         className="thumb thumb--right"
       />
@@ -79,7 +97,7 @@ const MultiRangeSlider = ({ min, max, onChange, className}) => {
             max={max}
             style={{ width: "75px", height: "25px", marginLeft: "-10px" }}
             onChange={(e) => {
-              setMinVal(e.target.value);
+             setExtremes(setMinVal, parseInt(e.target.value), true)
             }}
             className="bg-blue-200 rounded p-2 m-2 border-2 border-black"
           />
@@ -91,7 +109,7 @@ const MultiRangeSlider = ({ min, max, onChange, className}) => {
             max={max}
             style={{ width: "75px", height: "25px", marginLeft: "-10px" }}
             onChange={(e) => {
-              setMaxVal(e.target.value);
+              setExtremes(setMaxVal, parseInt(e.target.value), false)
             }}
             className="bg-blue-200 rounded p-2 m-2 border-2 border-black"
           />

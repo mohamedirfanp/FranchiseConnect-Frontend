@@ -39,12 +39,9 @@ function Navbar(props) {
                     routerConfig.map((route, index) => <NavLink to={
                             route.pathname
                         }
-                        className='pr-4'>
+                        className='pr-4' key={index}>
                         <p >{route.name}</p>
                     {location.pathname === route.pathname && <div className="border-b-2 border-gray-600"></div> }
-                    
-
-                    
                     </NavLink>)
                 }
                     <ProfileComponent/>
@@ -77,7 +74,7 @@ function Navbar(props) {
                                     `block p-4 ${
                                         location.pathname === route.pathname && 'text-cyan-600 font-semibold'
                                     }`
-                            }>
+                            } key={index}>
                                 {
                                 route.name
                             }</NavLink>)
