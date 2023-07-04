@@ -14,7 +14,7 @@ import { FranchiseeSignUp } from "../../../api/Franchisee/authApi";
 import ButtonComponent from "../../../components/ButtonComponent/ButtonComponent";
 import ToastMessage from "../../../components/ToastComponent/Toast";
 
-const FranchiseeRegister = () => {
+const FranchisorRegister = () => {
 
   const [error, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -261,4 +261,4 @@ const FranchiseeRegister = () => {
 };
 
 
-export default FranchiseeRegister;
+export default FranchisorRegister;

@@ -2,17 +2,28 @@
 const Franchisee = "Franchisee";
 const Franchisor = "Franchisor";
 
+const Role = "Role";
+
 const FranchiseeToken = "FranchiseeToken";
 const FranchisorToken = "FranchisorToken";
 
-export const setFranchisee = (franchisee) => {
-    localStorage.setItem(Franchisee, JSON.stringify(franchisee));
+// export const setFranchisee = (franchisee) => {
+//     localStorage.setItem(Franchisee, JSON.stringify(franchisee));
+// }
+
+
+// export const getFranchisee = ()  => {
+//     let user = localStorage.getItem(Franchisee);
+//     if(!user) return null; 
+//     return JSON.parse(user);
+// }
+
+export const setRole = (role) => {
+    localStorage.setItem(Role, role);
 }
 
-export const getFranchisee = ()  => {
-    let user = localStorage.getItem(Franchisee);
-    if(!user) return null; 
-    return JSON.parse(user);
+export const getRole = () => {
+   return  localStorage.getItem(Role);
 }
 
 export const setFranchiseeAuthToken = (token) => {

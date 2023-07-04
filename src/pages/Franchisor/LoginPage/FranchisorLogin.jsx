@@ -14,7 +14,7 @@ import ToastMessage from "../../../components/ToastComponent/Toast";
 
 
 
-const FranchiseeLogin = () => {
+const FranchisorLogin = () => {
 
   const [error, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -186,4 +186,4 @@ const FranchiseeLogin = () => {
   );
 };;
 
-export default FranchiseeLogin;
+export default FranchisorLogin;
