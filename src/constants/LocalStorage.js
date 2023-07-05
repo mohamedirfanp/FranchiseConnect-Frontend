@@ -1,11 +1,14 @@
 
-const Franchisee = "Franchisee";
-const Franchisor = "Franchisor";
+
+
 
 const Role = "Role";
 
-const FranchiseeToken = "FranchiseeToken";
-const FranchisorToken = "FranchisorToken";
+const AuthToken = "Token";
+
+const FranchiseExist = "FranchiseExist";
+
+
 
 // export const setFranchisee = (franchisee) => {
 //     localStorage.setItem(Franchisee, JSON.stringify(franchisee));
@@ -26,30 +29,40 @@ export const getRole = () => {
    return  localStorage.getItem(Role);
 }
 
-export const setFranchiseeAuthToken = (token) => {
-    localStorage.setItem(FranchiseeToken, token);
+export const setAuthToken = (token) => {
+    localStorage.setItem(AuthToken, token);
 }
 
-export const getFranchiseeAuthToken = () => {
-    return localStorage.getItem(FranchiseeToken);
+export const getAuthToken = () => {
+    return localStorage.getItem(AuthToken);
 }
 
-export const setFranchisorAuthToken = (token) => {
-    localStorage.setItem(FranchisorToken, token);
+export const setFranchiseExist = (exist) => {
+    return localStorage.setItem(FranchiseExist, exist);
 }
 
-export const getFranchisorAuthToken = () => {
-    return localStorage.getItem(FranchisorToken);
+export const getFranchiseeExist = () => {
+    return localStorage.getItem(FranchiseExist);
+   
+}
+
+// export const setFranchisorAuthToken = (token) => {
+//     localStorage.setItem(FranchisorToken, token);
+// }
+
+// export const getFranchisorAuthToken = () => {
+//     return localStorage.getItem(FranchisorToken);
+// }
+
+
+export const Logout = () => {
+    localStorage.removeItem(Role);
+    localStorage.removeItem(AuthToken);
+    localStorage.removeItem(FranchiseExist)
 }
 
 
-export const FranchiseeLogout = () => {
-    localStorage.removeItem(Franchisee);
-    localStorage.removeItem(FranchiseeToken);
-}
-
-
-export const FranchisorLogout = () => {
-    localStorage.removeItem(Franchisor);
-    localStorage.removeItem(FranchisorToken);
-}
+// export const FranchisorLogout = () => {
+//     localStorage.removeItem(Franchisor);
+//     localStorage.removeItem(FranchisorToken);
+// }
