@@ -6,7 +6,7 @@ const ButtonComponent = ({ text, onClick, className, icon}) => {
     return (
         <button
             // add passed classes and add default classes
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded ${className}`}
+            className={`bg-[#6366F1] hover:bg-[#3F51B5] text-white font-bold px-4 py-2 rounded ${className}`}
             onClick={onClick}
         >
             {icon && <FontAwesomeIcon icon={icon} />}

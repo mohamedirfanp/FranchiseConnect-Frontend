@@ -5,7 +5,7 @@ import { Checkbox } from 'primereact/checkbox';
 import { RadioButton } from 'primereact/radiobutton';
 // import { PhotoService } from './service/PhotoService';
 
-export default function GalleryComponent() {
+export default function GalleryComponent({gallery}) {
     const [images, setImages] = useState(null);
 
     var data = [
@@ -53,11 +53,11 @@ export default function GalleryComponent() {
     useEffect(() => {
         // PhotoService.getImages().then((data) => setImages(data));
 
-        setImages(data);
+        setImages(gallery);
     }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
+        return <img src={item.franchisePhotoUrl} alt="No Image Found" style={{ width: '100%', display: 'block', height: '250px' }} />;
     };
 
     return (
