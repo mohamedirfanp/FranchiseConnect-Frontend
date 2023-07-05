@@ -5,7 +5,7 @@ import { InputText } from "primereact/inputtext";
 import { useNavigate } from "react-router";
 import { FranchiseeSignIn } from "../../../api/Franchisee/authApi";
 import ErrorComponent from "../../../components/ErrorComponent/ErrorComponent";
-import {setRole, setFranchiseeAuthToken} from "../../../constants/LocalStorage";
+import {setRole, setAuthToken} from "../../../constants/LocalStorage";
 import { Button } from 'primereact/button';
 
 import { Toast } from "primereact/toast";
@@ -30,12 +30,12 @@ const FranchiseeLogin = () => {
     .then(res => {
       setErrorMessage(null);
       setRole("franchisee");
-      setFranchiseeAuthToken(res.data.value);
+      setAuthToken(res.data.value);
       ToastMessage(true, "Login Successful", toast);
       setLoading(false)
       setTimeout(() => {
         navigate("/franchisee/home");
-      },3000)
+      },2000)
       reset();
     })
     .catch(error => {

@@ -1,18 +1,17 @@
 import React, { useRef, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router";
+
 import { classNames } from "primereact/utils";
 import { InputText } from "primereact/inputtext";
-import { useNavigate } from "react-router";
-import { FranchiseeSignIn } from "../../../api/Franchisee/authApi";
-import ErrorComponent from "../../../components/ErrorComponent/ErrorComponent";
-import {setRole, setFranchiseeAuthToken} from "../../../constants/LocalStorage";
 import { Button } from 'primereact/button';
-
 import { Toast } from "primereact/toast";
+
+import ErrorComponent from "../../../components/ErrorComponent/ErrorComponent";
+import {setRole, setAuthToken} from "../../../constants/LocalStorage";
+
 import ToastMessage from "../../../components/ToastComponent/Toast";
-
-
-
+import {FranchisorSignIn} from "../../../api/Franchisor/authApi";
 
 const FranchisorLogin = () => {
 
@@ -26,16 +25,16 @@ const FranchisorLogin = () => {
   
   const onSubmit = (data) => {
     setLoading(true);
-    FranchiseeSignIn(data)
+    FranchisorSignIn(data)
     .then(res => {
       setErrorMessage(null);
-      setRole("franchisee");
-      setFranchiseeAuthToken(res.data.value);
+      setRole("franchisor");
+      setAuthToken(res.data.value);
       ToastMessage(true, "Login Successful", toast);
       setLoading(false)
       setTimeout(() => {
-        navigate("/franchisee/home");
-      },3000)
+        navigate("/franchisor/dashboard");
+      },2000)
       reset();
     })
     .catch(error => {
@@ -51,10 +50,10 @@ const FranchisorLogin = () => {
     <section className="hidden md:flex w-1/2 bg-gradient-to-br from-orange-400 to-indigo-700 justify-center items-center">
       <div className="w-3/4 h-4/6 bg-white bg-opacity-30 rounded p-10">
         <div className="space-y-2">
-          <p className="text-white text-4xl font-bold">Step</p>
-          <p className="text-white text-4xl font-bold">Into</p>
+          <p className="text-white text-4xl font-bold">Lead</p>
+          <p className="text-white text-4xl font-bold">Your</p>
           <p className="text-white text-4xl font-bold">Franchise</p>
-          <p className="text-[#14144c] text-5xl font-bold">Success!</p>
+          <p className="text-[#14144c] text-5xl font-bold">Towards Success!</p>
         </div>
         <p className="text-white mt-12 text-base">
           Franchise Solutions Simplified: Connect, Explore, Succeed

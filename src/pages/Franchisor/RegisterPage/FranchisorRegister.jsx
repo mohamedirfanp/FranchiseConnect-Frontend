@@ -9,7 +9,7 @@ import { Button } from 'primereact/button';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
 import ErrorComponent from "../../../components/ErrorComponent/ErrorComponent";
-import { FranchiseeSignUp } from "../../../api/Franchisee/authApi";
+import { FranchisorSignUp } from "../../../api/Franchisor/authApi";
 
 import ButtonComponent from "../../../components/ButtonComponent/ButtonComponent";
 import ToastMessage from "../../../components/ToastComponent/Toast";
@@ -54,7 +54,7 @@ const FranchisorRegister = () => {
 
     // Passwords match, proceed with form submission
     
-    FranchiseeSignUp({
+    FranchisorSignUp({
       UserName : data.name,
       UserEmail   : data.email,
       Password  : data.password,
@@ -64,8 +64,8 @@ const FranchisorRegister = () => {
       setLoading(false);
       ToastMessage(true,"Successfully Registered", toast);
       setTimeout(() => {
-        navigate("/franchisee/login")
-      },4000)
+        navigate("/franchisor/login")
+      },2000)
       reset();
     })
     .catch((error) => {
@@ -87,20 +87,20 @@ const FranchisorRegister = () => {
   return (
     <div className="flex w-full h-screen ">
       <Toast ref={toast} />
-      <section className="hidden md:flex w-1/2 bg-gradient-to-br from-orange-400 to-indigo-700 justify-center items-center">
+      <section className="hidden h-full md:flex w-1/2 bg-gradient-to-br from-orange-400 to-indigo-700 justify-center items-center">
         <div className="w-3/4 h-4/6 bg-white bg-opacity-30 rounded p-10">
           <div className="space-y-2">
-            <p className="text-white text-4xl font-bold">Start</p>
+            <p className="text-white text-4xl font-bold">Expand</p>
             <p className="text-white text-4xl font-bold">Your</p>
             <p className="text-white text-4xl font-bold">Franchise</p>
-            <p className="text-[#14144c] text-5xl font-bold">Journey!</p>
+            <p className="text-[#14144c] text-5xl font-bold">Empire!</p>
           </div>
           <p className="text-white mt-12 text-base">
             Franchise Solutions Simplified: Connect, Explore, Succeed
           </p>
         </div>
       </section>
-      <section className="w-full  md:w-1/2 shadow-xl flex flex-col items-center px-20 pt-3">
+      <section className="w-full  md:w-1/2  flex flex-col items-center px-20 pt-3">
         <div className=" space-y-5 flex flex-col items-start">
           <div>
             <p className="font-extrabold text-xl font-[Mukta]">Hey, hello 👋</p>

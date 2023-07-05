@@ -65,7 +65,7 @@ const FranchiseeRegister = () => {
       ToastMessage(true,"Successfully Registered", toast);
       setTimeout(() => {
         navigate("/franchisee/login")
-      },4000)
+      },2000)
       reset();
     })
     .catch((error) => {
@@ -100,7 +100,7 @@ const FranchiseeRegister = () => {
           </p>
         </div>
       </section>
-      <section className="w-full  md:w-1/2 shadow-xl flex flex-col items-center px-20 pt-3">
+      <section className="w-full  md:w-1/2 flex flex-col items-center px-20 pt-3">
         <div className=" space-y-5 flex flex-col items-start">
           <div>
             <p className="font-extrabold text-xl font-[Mukta]">Hey, hello 👋</p>

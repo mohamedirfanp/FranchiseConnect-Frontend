@@ -8,6 +8,10 @@ const routerConfig = [
     name: "Dashboard",
   },
   {
+    pathname: "/franchisor/request",
+    name: "Request"
+  },
+  {
     pathname: "/connect",
     name: "Connect",
   },
