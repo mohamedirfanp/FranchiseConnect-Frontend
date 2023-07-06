@@ -20,10 +20,8 @@ function LandingPage() {
 
             <section className='flex justify-end m-5'>
                 <Button label={toggle? "User" : "Seller"}
-                    onClick={ () => {
-
-                      setToggle((prevState) => !prevState)
-                    }
+                    onClick={ () =>
+                       setToggle((prevState) => !prevState)
                 }></Button>
         </section>
         <div className='flex items-center justify-center flex-col'>

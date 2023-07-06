@@ -34,7 +34,7 @@ const FranchisorLogin = () => {
       setLoading(false)
       setTimeout(() => {
         navigate("/franchisor/dashboard");
-      },2000)
+      },1000)
       reset();
     })
     .catch(error => {
@@ -175,7 +175,7 @@ const FranchisorLogin = () => {
           <button
             onClick={
               () => {
-                navigate("/franchisee/register");
+                navigate("/franchisor/register");
               }}
             className="underline font-medium">
             Create new</button></p></div>

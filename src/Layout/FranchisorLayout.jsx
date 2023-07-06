@@ -22,7 +22,7 @@ const routerConfig = [
 const FranchisorLayout = (props) => {
   return (
     <div className="w-full h-screen md:overflow-hidden bg-slate-200">
-     <Navbar routerConfig={routerConfig}/>
+     <Navbar routerConfig={routerConfig} isFavourite={false}/>
      <div className="flex w-full h-[90%] overflow-auto">
 
      {props.children}
