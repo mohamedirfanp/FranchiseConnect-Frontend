@@ -33,7 +33,7 @@ function CardComponent({ index, franchiseDetail }) {
             <Card title={franchiseDetail.franchise.franchiseName}
                 subTitle={subTitle}
                 header={header}
-                className="md: w-80  p-2  hover:outline outline-blue-400" key={index}>
+                className="md: w-80  p-2  hover:outline outline-[#6366F1]" key={index}>
 
                 <article className='flex gap-12 justify-start'>
                     <div className='grid grid-cols-1 gap-3'>

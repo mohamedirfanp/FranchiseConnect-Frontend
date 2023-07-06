@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function parseGrpcErrorMessage(grpcErrorMessage) {
+export function parseGrpcErrorMessage(grpcErrorMessage) {
   const detailRegex = /Detail="([^"]+)"/;
 
   const detailMatch = grpcErrorMessage.match(detailRegex);

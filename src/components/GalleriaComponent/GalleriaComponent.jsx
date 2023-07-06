@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Galleria } from 'primereact/galleria';
 
-export default function GalleriaComponent() {
+export default function GalleriaComponent({gallery}) {
     const [images, setImages] = useState(null);
 
     const responsiveOptions = [
@@ -63,21 +63,21 @@ export default function GalleriaComponent() {
 ];
 
     useEffect(() => {
-       setImages(data);
+       setImages(gallery);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />
+        return <img src={item.franchisePhotoUrl} alt="No Image Found" style={{ width: '600px', display: 'block', height:"280px" }} />
     }
 
     const thumbnailTemplate = (item) => {
-        return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />
+        return <img src={item.franchisePhotoUrl} alt="No Image Found" style={{ display: 'block', width: '150px', height: '100px' }} />
     }
 
     return (
-        <div className='p-4'>
+        <div className=' w-full p-4'>
             <Galleria value={images}  numVisible={7} circular 
-                item={itemTemplate} thumbnail={thumbnailTemplate} className='rounded' style={{ maxWidth: '640px' }}/>
+                item={itemTemplate} thumbnail={thumbnailTemplate} className='rounded' style={{ maxWidth: '100%' }}/>
         </div>
     )
 }

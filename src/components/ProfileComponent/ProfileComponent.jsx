@@ -3,8 +3,20 @@ import ButtonComponent from '../ButtonComponent/ButtonComponent';
 
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
+import {Logout} from '../../constants/LocalStorage'; 
+import { useNavigate } from 'react-router';
+import { NavLink } from 'react-router-dom';
+
 
 function ProfileComponent() {
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        Logout();
+        navigate('/');
+
+    };
     // Show dropdown menu when clicked on Profile icon
     function showDropdown() {
         document.getElementsByClassName("dropdown-content")[0].classList.toggle("hidden");
@@ -17,7 +29,10 @@ function ProfileComponent() {
             
         <div className="absolute mt-[10%] ml-[-75%] dropdown-content hidden bg-gray-100 p-2">
             <ButtonComponent text="Account" className="mb-1 w-[100%]"/>
-            <ButtonComponent text="Logout" className="mb-1 w-[100%]"/>
+            <ButtonComponent text="Logout" className="mb-1 w-[100%]" onClick={() => {
+                handleLogout();
+            }}/>
+            
         </div>
     </div>
   )
