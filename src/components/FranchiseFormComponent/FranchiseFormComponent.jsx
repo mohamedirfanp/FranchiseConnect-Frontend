@@ -3,8 +3,8 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 
-import ToastMessage from '../ToastComponent/Toast'; 
 
+import ToastMessage from '../ToastComponent/Toast' 
 
 import Step1 from './Step1';
 import Step2 from './Step2';
@@ -17,6 +17,8 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 
 import { useNavigate } from 'react-router';
 
+
+import {setFranchiseExist} from '../../constants/LocalStorage';
 
 const steps = ['Enter the Franchise Details', 'Enter the Social Links', 'Enter the Services', "Upload the Photos", "Confirmation"];
 
@@ -60,6 +62,7 @@ export default function HorizontalLinearStepper() {
       {
         franchiseProvideServiceName: "",
         franchiseProvideServiceDescription: "",
+        franchiseCustomizationAllowed: false,
       },
     ],
   });
@@ -119,8 +122,9 @@ export default function HorizontalLinearStepper() {
     CreateFranchise(formData)
     .then((response) => {
         console.log(response);
-        ToastMessage.show(true,response.data.response, toast)
         setLoading(false);
+        ToastMessage.show(true,response.data.response, toast)
+        setFranchiseExist('true');
         setTimeout(() => {
             navigate('/franchisor/dashboard');
         },2000)
@@ -152,19 +156,17 @@ export default function HorizontalLinearStepper() {
 
   return (
     <>
-    {
-        loading?  <div className="card flex justify-center w-screen h-screen z-50 ">
-        <ProgressSpinner />
-    </div> : <span></span>
-    }
-
-    <section className='w-screen h-screen'>
     <Toast ref={toast} />
+    {
+        loading?  <div className="card flex justify-center w-screen z-50 items-center ">
+        <ProgressSpinner />
+    </div> :  <section className='w-screen h-screen'>
+    
     <section className='w-full'>
         <h3 className="text-center mb-8 font-medium text-xl">Enter your Franchise Details</h3>
         <section className='w-1/2 sm:w-full pl-5'>
 
-      <Stepper activeStep={activeStep}>
+      <Stepper activeStep={activeStep} >
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -183,6 +185,9 @@ export default function HorizontalLinearStepper() {
     </section>
 
     </section>
+    }
+
+   
     </>
 
   );

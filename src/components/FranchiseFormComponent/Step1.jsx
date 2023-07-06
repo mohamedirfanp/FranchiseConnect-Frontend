@@ -180,7 +180,6 @@ function Step1({ handleNext, handleFormData, defaultValues }) {
                                     ></label>
                                     <span className="p-float-label">
                                         <InputText
-                                        keyfilter={"int"}
                                             id={field.name}
                                             value={field.value}
                                             className={classNames({ "p-invalid": fieldState.error })}

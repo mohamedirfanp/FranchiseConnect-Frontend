@@ -1,5 +1,5 @@
 
-
+import {ClearAll} from './SessionStorage'
 
 
 const Role = "Role";
@@ -59,6 +59,10 @@ export const Logout = () => {
     localStorage.removeItem(Role);
     localStorage.removeItem(AuthToken);
     localStorage.removeItem(FranchiseExist)
+
+    ClearAll();
+    
+
 }
 
 

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useForm, Controller, useFieldArray } from 'react-hook-form';   
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { classNames } from "primereact/utils";
 
 import { Card } from 'primereact/card';
@@ -8,11 +8,12 @@ import { InputText } from "primereact/inputtext";
 
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Checkbox } from 'primereact/checkbox';
 import ButtonComponent from '../ButtonComponent/ButtonComponent';
 
 
 // Step 3 component
-function Step3({ handleBack, handleFormData, handleNext ,defaultValues }) {
+function Step3({ handleBack, handleFormData, handleNext, defaultValues }) {
     const [services, setServices] = useState(defaultValues);
 
     const {
@@ -25,7 +26,7 @@ function Step3({ handleBack, handleFormData, handleNext ,defaultValues }) {
     const { fields, remove } = useFieldArray({
         control,
         name: 'services',
-      });
+    });
 
     const onSubmit = (data) => {
 
@@ -35,42 +36,45 @@ function Step3({ handleBack, handleFormData, handleNext ,defaultValues }) {
         for (let i = 0; i < serviceCount; i++) {
             const franchiseProvideServiceName = data[`franchiseProvideServiceName${i}`];
             const franchiseProvideServiceDescription = data[`franchiseProvideServiceDescription${i}`];
-            if(franchiseProvideServiceName && franchiseProvideServiceDescription)
-            servicesList.push({ franchiseProvideServiceName, franchiseProvideServiceDescription });
+            const franchiseCustomizationAllowed = data[`franchiseCustomizationAllowed${i}`];
+            if (franchiseProvideServiceName && franchiseProvideServiceDescription) {
+                servicesList.push({
+                    franchiseProvideServiceName,
+                    franchiseProvideServiceDescription,
+                    franchiseCustomizationAllowed
+                });
+            }
         }
+
         
 
-
-        handleFormData(servicesList,3)
+        handleFormData(servicesList, 3)
         setServices(servicesList);
 
         handleNext();
     };
 
     const handleAddService = () => {
-        setServices([...services, { franchiseProvideServiceName: '', franchiseProvideServiceDescription: '' }]);
+        setServices([...services, { franchiseProvideServiceName: '', franchiseProvideServiceDescription: '', franchiseCustomizationAllowed: false }]);
     };
-
-
 
     const handleServiceDelete = (index) => {
         setServices((prevServices) => {
             const updatedServices = [...prevServices];
             updatedServices.splice(index, 1);
             return updatedServices;
-        }); 
-
-
+        });
 
         setValue(`franchiseProvideServiceName${index}`, ''); // Clear the value of serviceName field
         setValue(`franchiseProvideServiceDescription${index}`, '');
+        setValue(`franchiseCustomizationAllowed${index}`, false);
 
         remove(index);
     }
 
     return (
-        <div>
-            <h1 className='font-bold text-2xl p-3'>Services</h1>
+        <div className='w-[90%'>
+            <h1 className='font-bold text-2xl p-3 w-full'>Services</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {services.map((service, index) => (
                     <Accordion multiple activeIndex={[0]} key={index}>
@@ -86,75 +90,94 @@ function Step3({ handleBack, handleFormData, handleNext ,defaultValues }) {
                                         }
                                     }}
                                     render={({ field, fieldState }) => (
-
                                         <div className='flex flex-col'>
                                             <span className='p-float-label'>
                                                 <InputText
                                                     id={`franchiseProvideServiceName${index}`}
                                                     {...field}
                                                     defaultValue={service.franchiseProvideServiceName}
-                                                   
                                                     className={classNames({ 'p-invalid': fieldState.error })}
                                                 />
-                                                <label htmlFor={field.name}>Service Name<span className='text-red-600 font-bold'>*</span></label>
-                                            </span>
-                                            {fieldState.error && (
-                                                <small className="p-error">{fieldState.error.message}</small>
-                                            )}
-                                        </div>
-                                    )}
-                                />
+                                                <label htmlFor={field.name}>Service Name
+                                                <span className='text-red-600 font-bold'>*</span>
+                                            </label>
+                                        </span>
+                                        {fieldState.error && (
+                                            <small className="p-error">{fieldState.error.message}</small>
+                                        )}
+                                    </div>
+                                )}
+                            />
 
+                            <Controller
+                                name={`franchiseProvideServiceDescription${index}`}
+                                control={control}
+                                rules={{
+                                    validate: (value) => {
+                                        const isFilled = value && value.trim() !== '';
+                                        return isFilled || 'Service Description is required';
+                                    }
+                                }}
+                                render={({ field, fieldState }) => (
+                                    <div className='flex flex-col'>
+                                        <span className='p-float-label'>
+                                            <InputTextarea
+                                                id={`franchiseProvideServiceDescription${index}`}
+                                                {...field}
+                                                defaultValue={service.franchiseProvideServiceDescription}
+                                                className={classNames({ 'p-invalid': fieldState.error })}
+                                            />
+                                            <label htmlFor={field.name}>Service Description
+                                                <span className='text-red-600 font-bold'>*</span>
+                                            </label>
+                                        </span>
+                                        {fieldState.error && (
+                                            <small className="p-error">{fieldState.error.message}</small>
+                                        )}
+                                    </div>
+                                )}
+                            />
+
+                            <div className='flex items-center gap-3'>
                                 <Controller
-                                    name={`franchiseProvideServiceDescription${index}`}
+                                    name={`franchiseCustomizationAllowed${index}`}
                                     control={control}
-                                    rules={{
-                                        validate: (value) => {
-                                            const isFilled = value && value.trim() !== '';
-                                            return isFilled || 'Service Description is required';
-                                        }
-                                    }}
-                                    render={({ field, fieldState }) => (
-                                        <div className='flex flex-col'>
-                                            <span className='p-float-label'>
-                                                <InputTextarea
-                                                    id={`franchiseProvideServiceDescription${index}`}
-                                                    {...field}
-                                                    defaultValue={service.franchiseProvideServiceDescription}
-                                                    className={classNames({ 'p-invalid': fieldState.error })}
-                                                />
-                                                <label htmlFor={field.name}>Service Description<span className='text-red-600 font-bold'>*</span></label>
-                                            </span>
-                                            {fieldState.error && (
-                                                <small className="p-error">{fieldState.error.message}</small>
-                                            )}
-                                        </div>
+                                    defaultValue={service.franchiseCustomizationAllowed}
+                                    render={({ field }) => (
+                                        <Checkbox
+                                            inputId={`customizationCheckbox${index}`}
+                                            checked={field.value} 
+                                            inputRef={field.ref} 
+                                            {...field}
+                                            onChange={(e) => field.onChange(e.checked)}
+                                        />
                                     )}
                                 />
+                                <label htmlFor={`customizationCheckbox${index}`}>Allow Customization</label>
+                            </div>
 
-                                {index ? <Button
+                            {index ? (
+                                <Button
                                     icon="pi pi-trash"
                                     className="p-button-rounded p-button-danger p-button-text"
                                     onClick={() => handleServiceDelete(index)}
-                                /> : <></>}
+                                />
+                            ) : (
+                                <></>
+                            )}
+                        </div>
+                    </AccordionTab>
+                </Accordion>
+            ))}
 
-                            </div>
-                        </AccordionTab>
-                    </Accordion>
-
-
-                ))}
-
-                <div className='m-5 pb-5 flex gap-3 justify-end'>
-                    <ButtonComponent text={"Back"} onClick={handleBack} />
-                    <ButtonComponent text={"Next"} type="submit"/>
-                </div>
-            </form>
-                    <ButtonComponent text={"Add Service"} onClick={()=> {
-                        handleAddService();
-                    }} />
-        </div>
-    );
+            <div className='m-5 pb-5 flex gap-3 justify-end'>
+                <ButtonComponent text={"Back"} onClick={handleBack} />
+                <ButtonComponent text={"Next"} type="submit" />
+            </div>
+        </form>
+        <ButtonComponent text={"Add Service"} onClick={handleAddService} />
+    </div>
+);
 }
 
 export default Step3;
