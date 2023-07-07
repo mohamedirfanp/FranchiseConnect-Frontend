@@ -53,7 +53,7 @@ export const routes = createBrowserRouter([
         element: <WishlistPage />
     },
     {
-        path: "/frachisor/request",
+        path: "/franchisor/request",
         element: <RequestPage />
     }
 ]) 

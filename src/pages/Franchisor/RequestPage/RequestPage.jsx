@@ -2,10 +2,13 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import FranchisorLayout from '../../../Layout/FranchisorLayout';
 
 
-import { FranchiseExists } from "../../../api/Franchisor/franchiseApi";
+import { FranchiseExists, GetAllPendingRequests } from "../../../api/Franchisor/franchiseApi";
 import { getFranchiseeExist, setFranchiseExist } from "../../../constants/LocalStorage";
 
 import CreateFranchiseComponent from '../../../components/CreateFranchiseComponent/CreateFranchiseComponent';
+import RequestCard from './RequestCard';
+
+
 function RequestPage() {
 
     const [requests, setRequests] = useState([]);
@@ -27,9 +30,30 @@ function RequestPage() {
         console.error(err)
       }
     }
-  
+    
+    const getRequestData = async () => {
+        try{
+            GetAllPendingRequests()
+            .then((response) => {
+                setRequests(response.data.responses);
+            })
+            .catch((error) => {
+                console.error()
+            })
+
+        }
+        catch(error)
+        {
+            console.error(error);
+        }
+    }
+
+    
+
+
     useLayoutEffect(() => {
       getFranchiseData();
+      getRequestData();
     }, [])
   
     
@@ -39,7 +63,30 @@ function RequestPage() {
     <>
     <FranchisorLayout>
       {
-        franchiseExists ? <>Request Page</>: <CreateFranchiseComponent />
+        franchiseExists ? <>
+
+
+    <div>
+        {
+            requests.length ?   <div>
+            <h1 className='m-3 text-3xl font-bold'>Requests</h1>
+            <section className='flex flex-wrap m-5'>
+            {requests.map((request,index) => {
+                
+               return (<div key={index}>
+                   <RequestCard request={request} />
+                </div>)
+    
+            })}
+    
+            </section>
+            </div>
+            : <div className='w-screen flex justify-center items-center h-[90%] text-2xl'>No Requests</div>    
+        }
+      
+    </div>
+
+        </>: <CreateFranchiseComponent />
       }
     </FranchisorLayout>
   </>
