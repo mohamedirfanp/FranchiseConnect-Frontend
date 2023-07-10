@@ -13,8 +13,10 @@ const NotFoundPage = () => {
     const role = getRole();
     if(role === "franchisor")
     navigate("/franchisor/dashboard")
+    else if(role === "franchisee")
+      navigate("/franchisee/home")
     else
-    navigate("/franchisee/home")
+      navigate("/");
   }
 
   return (

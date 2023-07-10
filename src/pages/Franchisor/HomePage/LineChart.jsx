@@ -64,9 +64,12 @@ function LineChart({ franchiseRequestList }) {
   }, [])
 
   return (
-    <div className="m-5 sm:bg-slate-00">
+    <div className="m-5 sm:bg-slate-00 ">
         <h1 className='text-center font-semibold text-xl'>Request Stats</h1>
-            <Chart type="line" data={chartData}  className='w-full' />
+            <div className=''>
+            <Chart type="line" data={chartData}   />
+
+            </div>
         </div>
   )
 }

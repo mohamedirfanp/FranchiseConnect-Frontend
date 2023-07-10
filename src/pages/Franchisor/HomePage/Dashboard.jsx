@@ -9,6 +9,7 @@ import AboutCard from './AboutCard';
 import DoughnutChart from './DoughnutChart';
 import NotificationCard from './NotificationCard';
 import LineChart from './LineChart';
+import SupportPage from '../../SupportPage/SupportPage';
 
 
 
@@ -57,20 +58,26 @@ function Dashboard() {
               <article className='flex justify-center items-center'>
                 <section className='grid grid-cols-1 sm:grid-cols-2'>
                   {
-                    franchiseData[0] !== undefined &&  <>
+                    franchiseData[0] !== undefined && <>
                       <AboutCard franchise={franchiseData[0]} />
                       <DoughnutChart franchiseRequestList={franchiseData} />
                       <NotificationCard />
                       <LineChart franchiseRequestList={franchiseData} />
                     </>
                   }
-                 
+
                 </section>
               </article>
             </section>
 
           </> : <CreateFranchiseComponent />
         }
+        {/* Support */}
+
+        <div className='relative'>
+
+          <SupportPage />
+        </div>
       </FranchisorLayout>
     </>
   )

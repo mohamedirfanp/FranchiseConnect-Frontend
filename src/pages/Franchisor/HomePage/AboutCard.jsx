@@ -75,7 +75,7 @@ function AboutCard({franchise}) {
                     <br></br>
                     <div className='grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5'>
                         <span>
-                            <p className='font-bold'>Investment Range</p>
+                            <p className='font-bold'>Investment Req.</p>
                             <p>Rs. {franchiseDetail.franchiseInvestment}</p>
                         </span>
                         <span>

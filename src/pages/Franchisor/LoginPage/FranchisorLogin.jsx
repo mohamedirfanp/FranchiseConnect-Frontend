@@ -48,14 +48,14 @@ const FranchisorLogin = () => {
   return (<div className="flex w-full h-screen">
     <Toast ref={toast} />
     <section className="hidden md:flex w-1/2 bg-gradient-to-br from-orange-400 to-indigo-700 justify-center items-center">
-      <div className="w-3/4 h-4/6 bg-white bg-opacity-30 rounded p-10">
+      <div className="w-3/4 h-4/6 bg-white bg-opacity-30 rounded p-8">
         <div className="space-y-2">
           <p className="text-white text-4xl font-bold">Lead</p>
           <p className="text-white text-4xl font-bold">Your</p>
           <p className="text-white text-4xl font-bold">Franchise</p>
           <p className="text-[#14144c] text-5xl font-bold">Towards Success!</p>
         </div>
-        <p className="text-white mt-12 text-base">
+        <p className="text-white mt-10 text-base">
           Franchise Solutions Simplified: Connect, Explore, Succeed
         </p>
       </div>
