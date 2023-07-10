@@ -1,12 +1,16 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 
 import { Chart } from 'primereact/chart';
+// import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+// import { Doughnut } from "react-chartjs-2";
+
 
 function DoughnutChart({franchiseRequestList}) {
-
+  
+    // ChartJS.register(ArcElement, Tooltip, Legend);
     // Grouping objects by day
     const [requestStatusData, setrequestStatusData] = useState({})
-    const [chartData, setChartData] = useState({});
+    const [chartData, setChartData] = useState(null);
 
     const getRequestStatusCounts = (data) => {
         let counts = {
@@ -70,12 +74,17 @@ function DoughnutChart({franchiseRequestList}) {
 
 
     return (
+
        <section className='bg-slate-300 m-5'>
         <h1 className='text-center font-bold text-2xl'>Requests Status</h1>
         <article className='flex justify-center items-center'>
 
         <div className='m-2'>
          <Chart type="doughnut" data={chartData} options={{cutout : '60%'}} className="w-full" />
+         {/* {chartData !== null && (
+            <Doughnut  data={chartData} options={{ cutout: '60%' }} />
+          )} */}
+         
         </div>
         </article>
        </section>

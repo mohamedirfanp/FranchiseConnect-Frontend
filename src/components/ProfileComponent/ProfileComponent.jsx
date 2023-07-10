@@ -28,7 +28,9 @@ function ProfileComponent() {
             {/* make the image round and small circle */}
             
         <div className="absolute mt-[10%] ml-[-75%] dropdown-content hidden bg-gray-100 p-2">
-            <ButtonComponent text="Account" className="mb-1 w-[100%]"/>
+            <ButtonComponent text="Account" className="mb-1 w-[100%]" onClick={() => {
+                navigate('/account')
+            }}/>
             <ButtonComponent text="Logout" className="mb-1 w-[100%]" onClick={() => {
                 handleLogout();
             }}/>

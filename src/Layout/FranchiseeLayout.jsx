@@ -10,7 +10,7 @@ const routerConfig = [
     name: "Home",
   },
   {
-    pathname: "connect",
+    pathname: "/franchisee/connect",
     name: "Connect",
   },
 ];
@@ -21,7 +21,7 @@ const FranchiseeLayout = (props) => {
   return (
     <WishlistProvider>
 
-      <div className="w-full h-screen md:overflow-hidden bg-slate-200">
+      <div className="w-full h-screen lg:overflow-hidden bg-slate-200">
       <Navbar routerConfig={routerConfig} isFavourite={true}/>
       <div className="flex w-full h-[90%] overflow-auto">
 

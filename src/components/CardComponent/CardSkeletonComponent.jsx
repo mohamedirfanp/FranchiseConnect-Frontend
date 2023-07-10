@@ -10,7 +10,7 @@ function CardSkeletonComponent() {
                 <Card header={
                     <div className="px-5 pt-5">
 
-                        <Skeleton variant="rectangular" width={250} height={200} />
+                        <Skeleton variant="rectangular" width={250} height={200} className='w-full' />
 
                     </div>
                 }>

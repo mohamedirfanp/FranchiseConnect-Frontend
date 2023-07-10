@@ -12,7 +12,7 @@ const routerConfig = [
     name: "Request"
   },
   {
-    pathname: "/connect",
+    pathname: "/franchisor/connect",
     name: "Connect",
   },
 ];

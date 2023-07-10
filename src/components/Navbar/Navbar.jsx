@@ -22,8 +22,6 @@ function Navbar(props) {
         setIsMenuOpen(!isMenuOpen);
     };
 
-
-
     return (
         <nav className='sticky top-0 z-50'>
             <div className="flex justify-between items-center h-16 bg-blue-100 text-black relative shadow-sm font-mono z-50" role="navigation">
@@ -101,7 +99,7 @@ function Navbar(props) {
                                         }</NavLink>)
                                 }
 
-                                <NavLink className="block p-4 hover:bg-blue-300 w-full text-start">Account</NavLink>
+                                <NavLink className="block p-4 hover:bg-blue-300 w-full text-start" to={"/account"}>Account</NavLink>
                                 <button className="block p-4 hover:bg-blue-300 w-full text-start" onClick={() => {
                                     Logout();
                                     navigate("/");
