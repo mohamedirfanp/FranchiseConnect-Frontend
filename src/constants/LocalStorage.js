@@ -60,6 +60,8 @@ export const Logout = () => {
     localStorage.removeItem(AuthToken);
     localStorage.removeItem(FranchiseExist)
 
+    localStorage.clear();
+
     ClearAll();
     
 
