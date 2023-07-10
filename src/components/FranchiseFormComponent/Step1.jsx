@@ -10,6 +10,7 @@ import { Checkbox } from "primereact/checkbox";
 
 
 import { InputTextarea } from 'primereact/inputtextarea';
+import { InputNumber } from 'primereact/inputnumber';
 
 import ButtonComponent from '../ButtonComponent/ButtonComponent';
 
@@ -155,12 +156,12 @@ function Step1({ handleNext, handleFormData, defaultValues }) {
                                         className={classNames({ "p-error": errors.franchiseInvestment })}
                                     ></label>
                                     <span className="p-float-label">
-                                        <InputText
-                                            id={field.name}
+                                    <InputNumber  id={field.name}
                                             value={field.value}
                                             className={classNames({ "p-invalid": fieldState.error })}
-                                            onChange={(e) => field.onChange(e.target.value)}
-                                        />
+                                            onValueChange={(e) => field.onChange(e.target.value)}
+                                             mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
+                                        
                                         <label htmlFor={field.name}>Franchise Investment<span className='text-red-600 font-bold'>*</span></label>
                                     </span>
                                     {getFormErrorMessage(field.name)}
@@ -179,12 +180,11 @@ function Step1({ handleNext, handleFormData, defaultValues }) {
                                         className={classNames({ "p-error": errors.franchiseFee })}
                                     ></label>
                                     <span className="p-float-label">
-                                        <InputText
-                                            id={field.name}
+                                    <InputNumber  id={field.name}
                                             value={field.value}
                                             className={classNames({ "p-invalid": fieldState.error })}
-                                            onChange={(e) => field.onChange(e.target.value)}
-                                        />
+                                            onValueChange={(e) => field.onChange(e.target.value)} 
+                                            mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
                                         <label htmlFor={field.name}>Franchise Fee<span className='text-red-600 font-bold'>*</span></label>
                                     </span>
                                     {getFormErrorMessage(field.name)}
@@ -202,12 +202,11 @@ function Step1({ handleNext, handleFormData, defaultValues }) {
                                         className={classNames({ "p-error": errors.franchiseSpace })}
                                     ></label>
                                     <span className="p-float-label">
-                                        <InputText
-                                            id={field.name}
+                                        <InputNumber id={field.name}
                                             value={field.value}
                                             className={classNames({ "p-invalid": fieldState.error })}
-                                            onChange={(e) => field.onChange(e.target.value)}
-                                        />
+                                            onValueChange={(e) => field.onChange(e.target.value)} suffix=" Sq. ft" />
+                                       
                                         <label htmlFor={field.name}>Franchise Space<span className='text-red-600 font-bold'>*</span></label>
                                     </span>
                                     {getFormErrorMessage(field.name)}

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { Checkbox } from 'primereact/checkbox';
+import { InputText } from 'primereact/inputtext'
 
-function QuotationPage({ franchise, setSelectedServices, selectedServices }) {
+function QuotationPage({ franchise, setSelectedServices, selectedServices, setUserData, userData, error }) {
 
     const franchiseDetail = franchise.franchise;
 
@@ -10,6 +11,8 @@ function QuotationPage({ franchise, setSelectedServices, selectedServices }) {
     const franchiseService = franchise.frachiseServiceList;
 
     const [isCustomization, setCustomization] = useState(false);
+
+
 
     // const [selectedServices, setSelectedServices] = useState([]);
 
@@ -50,6 +53,27 @@ function QuotationPage({ franchise, setSelectedServices, selectedServices }) {
                     <p className='font-bold'>Franchise Fee</p>
                     <p className='flex items-center gap-1'>Rs. {franchiseDetail.franchiseFee} </p>
                 </span>
+            </div>
+            <div className='grid grid-cols-1 gap-7 sm:grid-cols-2 sm:p-3 sm:gap-1 mt-5'>
+                <div>
+                    <span className='p-float-label'>
+                        <InputText id="investment" value={userData.investment} onChange={(e) => {
+                            setUserData({ ...userData, investment: e.target.value });
+                        }} />
+                        <label htmlFor='investment' className='font-bold'>Investment Budget<span className='text-red-600'>*</span></label>
+                    </span>
+                    {error && <p className='text-red-600'>*Investment Budget Required</p>}
+                </div>
+
+                <div>
+                    <span className='p-float-label'>
+                        <InputText id="space" value={userData.space} onChange={(e) => {
+                            setUserData({ ...userData, space: e.target.value });
+                        }}  />
+                        <label htmlFor='space' className='font-bold'>Space Budget<span className='text-red-600'>*</span></label>
+                    </span>
+                    {error && <p className='text-red-600'>*Space Budget Required</p>}
+                </div>
             </div>
             {franchiseDetail.franchiseCustomizedOption && <div className='p-5'>
                 <span className='flex gap-2 items-center'>

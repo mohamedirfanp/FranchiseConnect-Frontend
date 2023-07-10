@@ -14,7 +14,7 @@ import {
     getDownloadURL
 } from "firebase/storage";
 
-import storage from '../../firebaseConfig';
+import {storage} from '../../firebaseConfig';
 
 
 function Step4({handleBack, handleFormData, handleNext, defaultValues, formData}) {
@@ -176,6 +176,7 @@ function Step4({handleBack, handleFormData, handleNext, defaultValues, formData}
                 customUpload={true}
                 uploadHandler={handleFileUpload}
                 progressBarTemplate={onTemplateProgress}
+                
                  />
 
             <div className='m-3 flex gap-4 justify-between'>
