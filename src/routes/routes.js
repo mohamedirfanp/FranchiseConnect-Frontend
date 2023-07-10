@@ -1,4 +1,6 @@
 import  {createBrowserRouter} from "react-router-dom";
+
+
 import LandingPage from "../pages/LandingPage/LandingPage";
 import FranchiseeLogin from "../pages/Franchisee/LoginPage/FranchiseeLogin";
 import FranchiseeRegister from "../pages/Franchisee/RegisterPage/FranchiseeRegister";
@@ -10,11 +12,21 @@ import FranchisorRegister from "../pages/Franchisor/RegisterPage/FranchisorRegis
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import WishlistPage from "../pages/Franchisee/WishlistPage/WishlistPage";
 import RequestPage from "../pages/Franchisor/RequestPage/RequestPage";
+import PrivateFranchiseeRoute from "./PrivateFranchiseeRoute";
+import PrivateFranchisorRoute from "./PrivateFranchisorRoute";
+import ConnectPage from "../pages/ConnectPage/ConnectPage";
+import SupportPage from "../pages/SupportPage/SupportPage";
+import AccountPage from "../pages/AccountPage/AccountPage";
+
 
 export const routes = createBrowserRouter([
     {
         path: '/',
         element: <LandingPage />
+    },
+    {
+        path: "/notfound",
+        element: <NotFoundPage />
     },
     {
         path: "/franchisee/login",
@@ -26,15 +38,36 @@ export const routes = createBrowserRouter([
     },
     {
         path: "/franchisee/home",
-        element: <HomePage />
+        element: 
+        <PrivateFranchiseeRoute>
+            <HomePage />
+        </PrivateFranchiseeRoute>
     },
     {
         path: "/franchisee/franchise/:id",
-        element: <FranchisePage />
+        element:
+        <PrivateFranchiseeRoute>
+            <FranchisePage />
+        </PrivateFranchiseeRoute> 
     },
     {
-        path: "/franchisor/dashboard",
-        element: <Dashboard /> 
+        path: "/franchisee/wishlist",
+        element: 
+        <PrivateFranchiseeRoute>
+            <WishlistPage />
+        </PrivateFranchiseeRoute>
+    },
+
+    {
+        path: '/account',
+        element:<AccountPage/>,
+    },
+    {
+        path: "/franchisee/connect",
+        element: 
+        <PrivateFranchiseeRoute>
+            <ConnectPage />
+        </PrivateFranchiseeRoute>
     },
     {
         path: "/franchisor/login",
@@ -45,15 +78,23 @@ export const routes = createBrowserRouter([
         element: <FranchisorRegister />
     },
     {
-        path: "/notfound",
-        element: <NotFoundPage />
-    },
-    {
-        path: "/franchisee/wishlist",
-        element: <WishlistPage />
+        path: "/franchisor/dashboard",
+        element:
+        <PrivateFranchisorRoute>
+            <Dashboard /> 
+        </PrivateFranchisorRoute> 
     },
     {
         path: "/franchisor/request",
-        element: <RequestPage />
-    }
+        element:
+        <PrivateFranchisorRoute>
+            <RequestPage />
+        </PrivateFranchisorRoute> 
+    }, {
+        path: "/franchisor/connect",
+        element: 
+        <PrivateFranchisorRoute>
+            <ConnectPage />
+        </PrivateFranchisorRoute>
+    },
 ]) 
