@@ -25,7 +25,7 @@ export const AddWishlist = async(franchiseId) =>{
 }
 
 export const RemoveWishlist = async (userWishlistId) => {
-    return axiosInstance.delete('/franchise/user-wishlist', {userWishlistId : userWishlistId});
+    return axiosInstance.delete('/franchise/user-wishlist/'+userWishlistId);
 }
 
 
@@ -34,6 +34,15 @@ export const CreateRequest = async (data) => {
     return axiosInstance.post('/franchise/request', {
         franchiseId : data.franchiseId,
         ownerId : data.ownerId,
-        servicesId : data.servicesId
+        servicesId : data.servicesId,
+        investmentBudget: data.investmentBudget,
+        space : data.space
     })
 }
+
+
+// Get Conversations
+export const GetConversation = async () => {
+    return axiosInstance.get('/chat/get/conversations');
+}
+

@@ -26,6 +26,11 @@ export const GetAllRequests = async () => {
 export const UpdateRequest = async (data) => {
     return axiosInstance.put("/franchise/request", {
         franchiseRequestId: data.franchiseRequestId,
-        isRequestedStatus : data.status
+        isRequestStatus : data.isRequestStatus
     })
+}
+
+// Get Conversations
+export const GetConversation = async () => {
+    return axiosInstance.get('/chat/get/conversations');
 }
