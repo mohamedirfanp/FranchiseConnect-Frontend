@@ -7,89 +7,95 @@ import { getFranchiseeExist, setFranchiseExist } from "../../../constants/LocalS
 
 import CreateFranchiseComponent from '../../../components/CreateFranchiseComponent/CreateFranchiseComponent';
 import RequestCard from './RequestCard';
+import SupportPage from '../../SupportPage/SupportPage';
 
 
 function RequestPage() {
 
-    const [requests, setRequests] = useState([]);
-    const [franchiseExists, setFranchiseExists] = useState(false);
+  const [requests, setRequests] = useState([]);
+  const [franchiseExists, setFranchiseExists] = useState(false);
 
-    const getFranchiseData = async () => {
-      const franchiseStatus = getFranchiseeExist();
-      if (franchiseStatus === 'true') {
-        setFranchiseExists(true);
-        return;
-      }
-      try {
-        const response = await FranchiseExists();
-        if (!response.data) return;
-        setFranchiseExists(response.data.franchiseExist);
-        setFranchiseExist(response.data.franchiseExist);
-      }
-      catch (err) {
-        console.error(err)
-      }
+  const getFranchiseData = async () => {
+    const franchiseStatus = getFranchiseeExist();
+    if (franchiseStatus === 'true') {
+      setFranchiseExists(true);
+      return;
     }
-    
-    const getRequestData = async () => {
-        try{
-            GetAllPendingRequests()
-            .then((response) => {
-                setRequests(response.data.responses);
-            })
-            .catch((error) => {
-                console.error()
-            })
-
-        }
-        catch(error)
-        {
-            console.error(error);
-        }
+    try {
+      const response = await FranchiseExists();
+      if (!response.data) return;
+      setFranchiseExists(response.data.franchiseExist);
+      setFranchiseExist(response.data.franchiseExist);
     }
+    catch (err) {
+      console.error(err)
+    }
+  }
 
-    
+  const getRequestData = async () => {
+    try {
+      GetAllPendingRequests()
+        .then((response) => {
+          setRequests(response.data.responses);
+        })
+        .catch((error) => {
+          console.error()
+        })
+
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
 
 
-    useLayoutEffect(() => {
-      getFranchiseData();
-      getRequestData();
-    }, [])
-  
-    
+
+
+  useLayoutEffect(() => {
+    getFranchiseData();
+    getRequestData();
+  }, [])
+
+
 
 
   return (
     <>
-    <FranchisorLayout>
-      {
-        franchiseExists ? <>
-
-
-    <div>
+      <FranchisorLayout>
         {
-            requests.length ?   <div>
-            <h1 className='m-3 text-3xl font-bold'>Requests</h1>
-            <section className='flex flex-wrap m-5'>
-            {requests.map((request,index) => {
-                
-               return (<div key={index}>
-                   <RequestCard request={request} />
-                </div>)
-    
-            })}
-    
-            </section>
-            </div>
-            : <div className='w-screen flex justify-center items-center h-[90%] text-2xl'>No Requests</div>    
-        }
-      
-    </div>
+          franchiseExists ? <>
 
-        </>: <CreateFranchiseComponent />
-      }
-    </FranchisorLayout>
-  </>
+
+            <div>
+              {
+                requests.length ? <div>
+                  <h1 className='m-3 text-3xl font-bold'>Requests</h1>
+                  <section className='flex flex-wrap gap-5 m-5'>
+                    {requests.map((request, index) => {
+
+                      return (<div key={index} >
+                        <RequestCard request={request} />
+                      </div>)
+
+                    })}
+
+                  </section>
+                </div>
+                  : <div className='w-screen flex justify-center items-center h-[90%] text-2xl'>No Requests</div>
+              }
+
+            </div>
+
+          </> : <CreateFranchiseComponent />
+        }
+        {/* Support */}
+
+        <div className='relative'>
+
+          <SupportPage />
+        </div>
+      </FranchisorLayout>
+    </>
   )
 }
 

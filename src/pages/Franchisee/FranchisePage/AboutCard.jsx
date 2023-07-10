@@ -39,9 +39,16 @@ function AboutCard({ franchise }) {
 
     const [ selectedServices, setSelectedServices ] = useState([]);
 
+    const [ userData, setUserData] = useState({
+        investment : "",
+        space : ""
+    })
+
     const {  addToWishlist,  isAddedToWishlist } = useContext(WishlistContext);
 
     const [visible, setVisible] = useState(false);
+
+    const [error, setError] = useState(false);
 
     const [favourite, setFavourite] = useState(false);
     const navigate = useNavigate();
@@ -77,12 +84,19 @@ function AboutCard({ franchise }) {
         .catch((error) => {
             console.error(error);
             const message = parseGrpcErrorMessage(error.response.data)
-            console.log(message);
             ToastMessage(false,message.detail, toast);
         })
     }
 
     const handleFormSubmit = () =>{
+
+        if(userData.investment === '' || userData.space === '')
+        {
+            setError(true);
+            setVisible(true);
+            return;
+        }
+
         if(franchiseDetail.franchiseCustomizedOption)
         {
             if(selectedServices.length)
@@ -92,7 +106,9 @@ function AboutCard({ franchise }) {
                 callCreateRequest({
                     franchiseId : franchiseDetail.franchiseId,
                     ownerId : franchiseDetail.franchiseOwnerId,
-                    servicesId : requestSelectedServiceIds
+                    servicesId : requestSelectedServiceIds,
+                    investmentBudget: userData.investment,
+                    space : userData.space
                 });
                 
             }
@@ -102,7 +118,9 @@ function AboutCard({ franchise }) {
                 callCreateRequest({
                     franchiseId : franchiseDetail.franchiseId,
                     ownerId : franchiseDetail.franchiseOwnerId,
-                    servicesId : servicesId
+                    servicesId : servicesId,
+                    investmentBudget: userData.investment,
+                    space : userData.space
                 });
                 
             }
@@ -113,7 +131,9 @@ function AboutCard({ franchise }) {
             callCreateRequest({
                 franchiseId : franchiseDetail.franchiseId,
                 ownerId : franchiseDetail.franchiseOwnerId,
-                servicesId : servicesId
+                servicesId : servicesId,
+                investmentBudget: userData.investment,
+                space : userData.space
             });
         }
 
@@ -258,7 +278,7 @@ function AboutCard({ franchise }) {
                     </article>}
 
                     <Dialog header="Franchise Info" visible={visible} style={{ width: '75vw' }} onHide={() => setVisible(false)} footer={footerContent} draggable={false} resizable={false}>
-                        <QuotationPage franchise={franchise} setSelectedServices={setSelectedServices} selectedServices={selectedServices}/>
+                        <QuotationPage franchise={franchise} setSelectedServices={setSelectedServices} selectedServices={selectedServices} error={error} setUserData={setUserData} userData={userData}/>
                     </Dialog>
                 </section>
             </Card>
