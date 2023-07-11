@@ -17,6 +17,8 @@ import PrivateFranchisorRoute from "./PrivateFranchisorRoute";
 import ConnectPage from "../pages/ConnectPage/ConnectPage";
 import SupportPage from "../pages/SupportPage/SupportPage";
 import AccountPage from "../pages/AccountPage/AccountPage";
+// import Dashboard from '../pages/AdminPage/Dashboard';
+import QueryPage from "../pages/AdminPage/QueryPage";
 
 
 export const routes = createBrowserRouter([
@@ -97,4 +99,12 @@ export const routes = createBrowserRouter([
             <ConnectPage />
         </PrivateFranchisorRoute>
     },
+    // {
+    //     path: "/admin/dashboard",
+    //     element: <Dashboard />
+    // },
+    {
+        path: "/query",
+        element: <QueryPage />
+    }
 ]) 
