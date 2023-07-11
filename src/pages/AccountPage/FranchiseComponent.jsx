@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { classNames } from "primereact/utils";
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
@@ -7,10 +7,18 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Controller, useForm } from 'react-hook-form';
 import { Chips } from 'primereact/chips';
 import { Checkbox } from 'primereact/checkbox';
+import { Button } from 'primereact/button';
+
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent'; // Import your custom ButtonComponent
+
+import {UpdateFranchise} from '../../api/Franchisor/franchiseApi';
+import ToastMessage from '../../components/ToastComponent/Toast';
+import { Toast } from 'primereact/toast';
 
 function FranchiseComponent({ franchise }) {
 
+    const toast = useRef(null);
+    const [isEditing, setIsEditing] = useState(false);
 
     const {
         handleSubmit,
@@ -33,9 +41,30 @@ function FranchiseComponent({ franchise }) {
     });
     
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        
         console.log(data);
         // Perform form submission logic
+        try{
+            const response = await UpdateFranchise({
+                ...data, franchisePreferredExpansionLocation : data.franchisePreferredExpansionLocation.join(','),
+                franchiseFee : `${data.franchiseFee}`,
+                franchiseCurrentCount : `${data.franchiseCurrentCount}`,
+                franchiseInvestment : `${data.franchiseInvestment}`,
+                franchiseSpace : `${data.franchiseSpace},`,
+                franchiseId : franchise.franchiseId
+            })
+            if(!response) return;
+            console.log(response);
+            ToastMessage(true, "Successfully Updated Details",toast);
+            setIsEditing(false)
+
+        }
+        catch(error)
+        {
+            console.error(error);
+        }
+
     };
 
     const getFormErrorMessage = (name) => {
@@ -46,11 +75,12 @@ function FranchiseComponent({ franchise }) {
 
 
         <section className='w-full flex justify-center'>
+            <Toast ref={toast} />
             <div className='w-3/4'>
 
 
                 <Card header={<><h1 className='text-center font-bold text-xl'>Franchise Details</h1></>}>
-                    <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2  gap-2 sm:ml-16">
+                    <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2  gap-2 sm:ml-16">
                         <div className='flex gap-3 flex-col'>
 
                             <Controller
@@ -69,6 +99,7 @@ function FranchiseComponent({ franchise }) {
                                                 value={field.value}
                                                 className={classNames({ "p-invalid": fieldState.error })}
                                                 onChange={(e) => field.onChange(e.target.value)}
+                                                disabled={!isEditing}
                                             />
                                             <label htmlFor={field.name}>Franchise Name<span className='text-red-600 font-bold'>*</span></label>
                                         </span>
@@ -93,6 +124,7 @@ function FranchiseComponent({ franchise }) {
                                                 value={field.value}
                                                 className={classNames({ "p-invalid": fieldState.error })}
                                                 onChange={(e) => field.onChange(e.target.value)}
+                                                disabled={!isEditing}
                                             />
                                             <label htmlFor={field.name}>Franchise Industry<span className='text-red-600 font-bold'>*</span></label>
                                         </span>
@@ -117,6 +149,7 @@ function FranchiseComponent({ franchise }) {
                                                 value={field.value}
                                                 className={classNames({ "p-invalid": fieldState.error })}
                                                 onChange={(e) => field.onChange(e.target.value)}
+                                                disabled={!isEditing}
                                             />
                                             <label htmlFor={field.name}>Franchise Location<span className='text-red-600 font-bold'>*</span></label>
                                         </span>
@@ -142,6 +175,7 @@ function FranchiseComponent({ franchise }) {
                                                 className={classNames({ "p-invalid": fieldState.error })}
                                                 onChange={(e) => field.onChange(e.target.value)}
                                                 rows={5} cols={24}
+                                                disabled={!isEditing}
                                             />
                                             <label htmlFor={field.name}>Franchise About<span className='text-red-600 font-bold'>*</span></label>
                                         </span>
@@ -169,7 +203,8 @@ function FranchiseComponent({ franchise }) {
                                                 value={field.value}
                                                 className={classNames({ "p-invalid": fieldState.error })}
                                                 onValueChange={(e) => field.onChange(e.target.value)}
-                                                mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
+                                                mode="currency" currency="INR" currencyDisplay="code" locale="en-IN"
+                                                disabled={!isEditing} />
 
                                             <label htmlFor={field.name}>Franchise Investment<span className='text-red-600 font-bold'>*</span></label>
                                         </span>
@@ -193,7 +228,8 @@ function FranchiseComponent({ franchise }) {
                                                 value={field.value}
                                                 className={classNames({ "p-invalid": fieldState.error })}
                                                 onValueChange={(e) => field.onChange(e.target.value)}
-                                                mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
+                                                mode="currency" currency="INR" currencyDisplay="code" locale="en-IN"
+                                                disabled={!isEditing} />
                                             <label htmlFor={field.name}>Franchise Fee<span className='text-red-600 font-bold'>*</span></label>
                                         </span>
                                         {getFormErrorMessage(field.name)}
@@ -214,7 +250,8 @@ function FranchiseComponent({ franchise }) {
                                             <InputNumber id={field.name}
                                                 value={field.value}
                                                 className={classNames({ "p-invalid": fieldState.error })}
-                                                onValueChange={(e) => field.onChange(e.target.value)} suffix=" Sq. ft" />
+                                                onValueChange={(e) => field.onChange(e.target.value)} suffix=" Sq. ft"
+                                                disabled={!isEditing} />
 
                                             <label htmlFor={field.name}>Franchise Space<span className='text-red-600 font-bold'>*</span></label>
                                         </span>
@@ -239,6 +276,7 @@ function FranchiseComponent({ franchise }) {
                                                 value={field.value}
                                                 className={classNames({ "p-invalid": fieldState.error })}
                                                 onChange={(e) => field.onChange(e.target.value)}
+                                                disabled={!isEditing}
                                             />
                                             <label htmlFor={field.name}>Franchise Current Count<span className='text-red-600 font-bold'>*</span></label>
                                         </span>
@@ -246,6 +284,8 @@ function FranchiseComponent({ franchise }) {
                                     </>
                                 )}
                             />
+                            <div className='mt-3'>
+
                             <Controller
                                 name="franchisePreferredExpansionLocation"
                                 control={control}
@@ -257,6 +297,7 @@ function FranchiseComponent({ franchise }) {
                                             <Chips id={field.name}
                                                 name="franchisePreferredExpansionLocation"
                                                 value={field.value}
+                                                disabled={!isEditing}
                                                 onChange={(e) => field.onChange(e.value)} className={classNames({ 'p-invalid': fieldState.error })}
 
                                             />
@@ -268,6 +309,7 @@ function FranchiseComponent({ franchise }) {
                                     </>
                                 )}
                             />
+                            </div>
                             <Controller
                                 name="franchiseCustomizedOption"
                                 control={control}
@@ -280,7 +322,8 @@ function FranchiseComponent({ franchise }) {
                                                 checked={field.value}
                                                 inputRef={field.ref}
                                                 className={classNames({ 'p-invalid mr-1': fieldState.error })}
-                                                onChange={(e) => field.onChange(e.checked)} />
+                                                onChange={(e) => field.onChange(e.checked)}
+                                                disabled={!isEditing} />
                                             Customization Allowed
                                         </span>
                                         {getFormErrorMessage(field.name)}
@@ -290,8 +333,14 @@ function FranchiseComponent({ franchise }) {
                         </div>
 
                         <span className='flex justify-start w-full'>
-
-                            <ButtonComponent text={"Submit"} type="submit" />
+                            { isEditing ? 
+                            <div className='flex gap-3'>
+                                <ButtonComponent text={"Save Changes"} type="submit" />
+                                <Button label='Cancel' onClick={() => setIsEditing(false)} />
+                            </div>    
+                            : <Button icon="pi pi-pencil" label='Edit' onClick={() => setIsEditing(true)} />
+                        }
+                            
                         </span>
                     </form>
                 </Card>

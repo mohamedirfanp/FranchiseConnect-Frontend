@@ -11,7 +11,7 @@ import { Logout } from '../../constants/LocalStorage';
 
 function Navbar(props) {
     const location = useLocation();
-    const { routerConfig, isFavourite } = props;
+    const { routerConfig, isFavourite, isAdmin=false } = props;
 
     const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ function Navbar(props) {
                 <div className="px-4 cursor-pointer md:hidden flex justify-center items-center"
                     onClick={toggleMenu}>
                         {
-                            isFavourite && <NavLink to={"/franchisee/wishlist"}>
+                            isFavourite && !isAdmin && <NavLink to={"/franchisee/wishlist"}>
                             <div className="dropbtn relative rounded-[50%] flex items-center justify-center w-10 h-10 px-0 py-0 border border-red-400 mr-2 hover:cursor-pointer">
                                 <i className='pi pi-heart' style={{ color: 'red' }}></i>
                             </div>
@@ -58,14 +58,14 @@ function Navbar(props) {
                         </NavLink>)
                     }
                     {
-                        isFavourite &&   <NavLink to={"/franchisee/wishlist"}>
+                        isFavourite && !isAdmin &&  <NavLink to={"/franchisee/wishlist"}>
                         <div className="dropbtn relative rounded-[50%] flex items-center justify-center w-10 h-10 px-0 py-0 border border-red-400 mr-2 hover:cursor-pointer">
                             <i className='pi pi-heart' style={{ color: 'red' }}></i>
                         </div>
                     </NavLink>
                     }
-                  
-                    <ProfileComponent />
+                    {!isAdmin && <ProfileComponent />}
+                    
                 </div>
                 {
                     isMenuOpen && (
@@ -99,11 +99,16 @@ function Navbar(props) {
                                         }</NavLink>)
                                 }
 
+                                {!isAdmin && <>
+                                
                                 <NavLink className="block p-4 hover:bg-blue-300 w-full text-start" to={"/account"}>Account</NavLink>
                                 <button className="block p-4 hover:bg-blue-300 w-full text-start" onClick={() => {
                                     Logout();
                                     navigate("/");
                                 }}>Logout</button>
+                                
+                                </>}
+
 
                             </div>
                         </>
