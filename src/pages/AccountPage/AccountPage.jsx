@@ -11,6 +11,7 @@ import FranchisorLayout from '../../Layout/FranchisorLayout';
 import AccountComponent from './AccountComponent';
 import FranchiseComponent from './FranchiseComponent';
 import ServiceComponent from './ServiceComponent';
+import AccountGalleryComponent from './AccountGalleryComponent';
 
 
 function AccountPage() {
@@ -19,6 +20,8 @@ function AccountPage() {
   const [role, setRole] = useState(null);
 
   const [franchiseData, setFranchiseData] = useState(null)
+
+  const [showFranchise, setShowFranchise] = useState(false);
 
   const getFranchiseDetail = async () => {
     const franchiseResponse = await GetFranchise();
@@ -53,8 +56,8 @@ function AccountPage() {
       {role === 'franchisor' && <FranchisorLayout>
       <div className='w-screen h-screen'>
 
-      <AccountComponent role={role}/>
-      {franchiseData &&   <div>
+      <AccountComponent role={role} setShowFranchise={setShowFranchise}/>
+      {franchiseData && showFranchise &&  <div>
         <h1 className='m-10 text-center font-bold text-4xl'>Franchise Info</h1>
 
         <div className='w-full flex flex-col gap-5'>
@@ -62,6 +65,8 @@ function AccountPage() {
         <FranchiseComponent franchise={franchiseData.franchise} />
 
         <ServiceComponent franchiseServiceList={franchiseData.frachiseServiceList} />
+
+        <AccountGalleryComponent galleryList={franchiseData.franchiseGalleryList} franchise={franchiseData.franchise} getFranchiseDetail={getFranchiseDetail}/>
 
         </div>
 

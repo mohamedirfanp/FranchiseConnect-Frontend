@@ -94,7 +94,7 @@ function NotificationCard() {
 								body={(rowData) => (
 									<Button icon='pi pi-arrow-right' onClick={() =>{
 										console.log(rowData.conversationId)
-										navigate('/connect')
+										navigate('/franchisor/connect')
 									}
 									}  />
 								)}

@@ -25,7 +25,7 @@ import {Logout} from '../../constants/LocalStorage';
 import { useNavigate } from 'react-router';
 
 
-function AccountComponent({ role }) {
+function AccountComponent({ role, setShowFranchise }) {
     const [isEditing, setIsEditing] = useState(false);
 
     const [profileUrl, setProfileUrl] = useState(null);
@@ -240,11 +240,12 @@ function AccountComponent({ role }) {
                             <div className='flex gap-5'>
                                 <div className='mt-4 flex justify-center gap-4 items-center w-full'>
                                     {isEditing ? (
-                                        <Button label='Save' className='p-button-success' onClick={handleSaveClick} />
+                                        <Button label='Save'  onClick={handleSaveClick} />
                                     ) : (
-                                        <Button label='Edit' className='p-button-secondary' icon='pi pi-pencil' onClick={handleEditClick} />
+                                        <Button label='Edit' className='h-full' icon='pi pi-pencil' onClick={handleEditClick} />
                                     )}
                                     <ButtonComponent text={'Change Password'} onClick={() => setVisible(true)} />
+                                    <ButtonComponent text={'Show Franchise'} onClick={() => setShowFranchise((prevState) => !prevState)} />
                                     
                                 </div>
                             </div>

@@ -73,7 +73,7 @@ function Step3({ handleBack, handleFormData, handleNext, defaultValues }) {
     }
 
     return (
-        <div className='w-[90%'>
+        <div className='w-[90%]'>
             <h1 className='font-bold text-2xl p-3 w-full'>Services</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {services.map((service, index) => (
