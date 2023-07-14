@@ -17,6 +17,7 @@
     "firebase": "^9.23.0",
     "gsap": "^3.12.2",
     "hsl-to-hex": "^1.0.0",
+    "jwt-decode": "^3.1.2",
     "primeicons": "^6.0.1",
     "primereact": "^9.6.0",
     "react": "^18.2.0",
