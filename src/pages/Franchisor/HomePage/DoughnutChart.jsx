@@ -36,16 +36,16 @@ function DoughnutChart({franchiseRequestList}) {
         return counts;
       };
 
-      const initialChartData = () => {
+      const initialChartData = (response) => {
         const documentStyle = getComputedStyle(document.documentElement);
         const data = {
             labels: ['Pending', 'Accepted', 'Rejected'],
             datasets: [
                 {
                     // DEV : REMOVE DATA IN PROD
-                    data: [requestStatusData.Pending+15, requestStatusData.Accepted+40, requestStatusData.Rejected + 20],
+                    // data: [requestStatusData.Pending+15, requestStatusData.Accepted+40, requestStatusData.Rejected + 20],
                     // PROD : DATA IN PROD
-                    // data: [requestStatusData.Pending, requestStatusData.Accepted, requestStatusData.Rejected],
+                    data: [response.Pending, response.Accepted, response.Rejected],
                     backgroundColor: [
                         documentStyle.getPropertyValue('--blue-500'), 
                         documentStyle.getPropertyValue('--green-500'),
@@ -66,7 +66,7 @@ function DoughnutChart({franchiseRequestList}) {
 
         const response = getRequestStatusCounts(franchiseRequestList);
         setrequestStatusData(response);
-        const chartDataResponse = initialChartData();
+        const chartDataResponse = initialChartData(response);
         setChartData(chartDataResponse);
 
 
@@ -75,18 +75,19 @@ function DoughnutChart({franchiseRequestList}) {
 
     return (
 
-       <section className='bg-slate-300 m-5'>
-        <h1 className='text-center font-bold text-2xl'>Requests Status</h1>
-        <article className='flex justify-center items-center'>
+       <section className='bg-slate-300 m-5 '>
+        <h1 className='text-xl text-center font-bold'>Request Count</h1>
+
+        <div className='flex justify-center'>
 
         <div className='m-2'>
-         <Chart type="doughnut" data={chartData} options={{cutout : '60%'}} className="w-full" />
+         <Chart type="doughnut" data={chartData} options={{cutout : '50%'}} className='w-full' />
          {/* {chartData !== null && (
             <Doughnut  data={chartData} options={{ cutout: '60%' }} />
           )} */}
          
         </div>
-        </article>
+        </div>
        </section>
     )
 }

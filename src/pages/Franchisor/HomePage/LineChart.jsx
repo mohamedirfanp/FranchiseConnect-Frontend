@@ -67,7 +67,7 @@ function LineChart({ franchiseRequestList }) {
     <div className="m-5 sm:bg-slate-00 ">
         <h1 className='text-center font-semibold text-xl'>Request Stats</h1>
             <div className=''>
-            <Chart type="line" data={chartData}   />
+            <Chart type="line" data={chartData}  className='h-full' />
 
             </div>
         </div>

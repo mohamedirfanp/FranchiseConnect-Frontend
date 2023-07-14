@@ -372,7 +372,7 @@ function ConnectPage() {
                                 </div>
                             ))
                         } </div>
-                    <div className='chat w-[85%] md:w-[70%] h-full overflow-auto bg-[#efeaea]'>
+                    <div className='chat w-[85%] md:w-[70%] h-full overflow-auto bg-slate-200'>
                         {
                             currentConversation === null && <div className='flex justify-center items-center text-xl  h-full font-semibold'>
                                 Click on a chat to start messaging.</div>
@@ -405,7 +405,7 @@ function ConnectPage() {
 
                                                             {
                                                                 (chat.message.startsWith('https')) ? <div className="max-w-xs mx-1 my-2">
-                                                                    <div className="relative p-0 bg-blue-300 text-white rounded-lg rounded-tr-[0%]">
+                                                                    <div className="relative p-0 bg-blue-300 text-black rounded-lg rounded-tr-[0%]">
                                                                         <div className="aspect-w-16 aspect-h-9">
                                                                             <img src={
                                                                                 `${chat.message
@@ -413,16 +413,16 @@ function ConnectPage() {
                                                                             } alt="Image" className="object-contain overflow-hidden p-2" />
                                                                         </div>
                                                                         <div className="flex justify-end w-full px-2">
-                                                                            <span className="block text-xs text-gray-300 mt-1">{getformattedTime(chat.createdAt)}</span>
+                                                                            <span className="block text-xs text-gray-900 mt-1">{getformattedTime(chat.createdAt)}</span>
                                                                         </div>
                                                                     </div>
                                                                     <div className="absolute top-0 left-0 w-0 h-0 border-t-8 border-l-8 border-transparent transform -translate-x-full -translate-y-1/2"></div>
                                                                 </div> : <div className="flex items-start justify-end">
                                                                     <div className="max-w-xs mx-1 my-2">
-                                                                        <div className="relative p-1 bg-indigo-300 text-white rounded-lg rounded-tr-[0%]">
+                                                                        <div className="relative p-1 bg-blue-300 text-black rounded-lg rounded-tr-[0%]">
                                                                             <span className="block p-2">{chat.message}</span>
                                                                             <div className='flex justify-end w-full'>
-                                                                                <span className=" block text-xs text-gray-300 mt-1">{getformattedTime(chat.createdAt)}</span>
+                                                                                <span className=" block text-xs text-gray-900 mt-1">{getformattedTime(chat.createdAt)}</span>
                                                                             </div>
                                                                         </div>
                                                                         <div className="absolute top-0 left-0 w-0 h-0 border-t-8 border-l-8 border-transparent transform -translate-x-full -translate-y-1/2"></div>
@@ -437,12 +437,20 @@ function ConnectPage() {
                                                         className='w-full flex justify-start'>
                                                         <span className='w-3/4 md:w-1/2 flex justify-start'>
                                                             {
-                                                                (chat.message.startsWith('https')) ? <div className="aspect-w-16 aspect-h-9">
-                                                                    <img src={
-                                                                        `${chat.message
-                                                                        }`
-                                                                    } alt="Image" className="object-contain overflow-hidden p-2" />
-                                                                </div> : <div className="flex items-start justify-end">
+                                                                (chat.message.startsWith('https')) ? <div className="max-w-xs mx-1 my-2">
+                                                                <div className="relative p-0 bg-blue-500 text-white rounded-lg rounded-tl-[0%]">
+                                                                    <div className="aspect-w-16 aspect-h-9">
+                                                                        <img src={
+                                                                            `${chat.message
+                                                                            }`
+                                                                        } alt="Image" className="object-contain overflow-hidden p-2" />
+                                                                    </div>
+                                                                    <div className="flex justify-end w-full px-2">
+                                                                        <span className="block text-xs text-gray-900 mt-1">{getformattedTime(chat.createdAt)}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="absolute top-0 left-0 w-0 h-0 border-t-8 border-l-8 border-transparent transform -translate-x-full -translate-y-1/2"></div>
+                                                            </div>: <div className="flex items-start justify-end">
                                                                     <div className="max-w-xs mx-1 my-2">
                                                                         <div className="relative p-0 bg-blue-500 text-white rounded-lg rounded-tl-[0%]">
                                                                             <span className="block p-2">{chat.message}</span>
@@ -564,7 +572,7 @@ function ConnectPage() {
                                 </div>
                             ))
                         } </div>
-                    <div className='chat w-[85%] md:w-[70%] h-full overflow-auto bg-[#efeaea]'>
+                    <div className='chat w-[85%] md:w-[70%] h-full overflow-auto bg-slate-200'>
                         {
                             currentConversation === null && <div className='flex justify-center items-center text-xl  h-full font-semibold'>
                                 Click on a chat to start messaging.</div>
@@ -597,7 +605,7 @@ function ConnectPage() {
 
                                                             {
                                                                 (chat.message.startsWith('https')) ? <div className="max-w-xs mx-1 my-2">
-                                                                    <div className="relative p-0 bg-blue-300 text-white rounded-lg rounded-tr-[0%]">
+                                                                    <div className="relative p-0 bg-blue-300 text-black rounded-lg rounded-tr-[0%]">
                                                                         <div className="aspect-w-16 aspect-h-9">
                                                                             <img src={
                                                                                 `${chat.message
@@ -629,12 +637,20 @@ function ConnectPage() {
                                                         className='w-full flex justify-start'>
                                                         <span className='w-3/4 md:w-1/2 flex justify-start'>
                                                             {
-                                                                (chat.message.startsWith('https')) ? <div className="aspect-w-16 aspect-h-9">
-                                                                    <img src={
-                                                                        `${chat.message
-                                                                        }`
-                                                                    } alt="Image" className="object-contain overflow-hidden p-2" />
-                                                                </div> : <div className="flex items-start justify-end">
+                                                                (chat.message.startsWith('https')) ? <div className="max-w-xs mx-1 my-2">
+                                                                <div className="relative p-0 bg-blue-500 text-white rounded-lg rounded-tr-[0%]">
+                                                                    <div className="aspect-w-16 aspect-h-9">
+                                                                        <img src={
+                                                                            `${chat.message
+                                                                            }`
+                                                                        } alt="Image" className="object-contain overflow-hidden p-2" />
+                                                                    </div>
+                                                                    <div className="flex justify-end w-full px-2">
+                                                                        <span className="block text-xs text-gray-300 mt-1">{getformattedTime(chat.createdAt)}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="absolute top-0 left-0 w-0 h-0 border-t-8 border-l-8 border-transparent transform -translate-x-full -translate-y-1/2"></div>
+                                                            </div>: <div className="flex items-start justify-end">
                                                                     <div className="max-w-xs mx-1 my-2">
                                                                         <div className="relative p-0 bg-blue-500 text-white rounded-lg rounded-tl-[0%]">
                                                                             <span className="block p-2">{chat.message}</span>
@@ -713,7 +729,7 @@ function ConnectPage() {
                                             </div>
                                         </div>
                                     </div>
-                                </article> : <p className='font-semibold text-center text-red-500'>Please entry your status for request in the Request Page to chat.</p>)}
+                                </article> : conversation[currentConversation.index].isAccepted === 'Rejected' ? <p className='font-semibold text-center text-red-500'>The Request is Rejected</p> : <p className='font-semibold text-center text-red-500'>Please entry your status for request in the Request Page to chat.</p>)}
 
 
 

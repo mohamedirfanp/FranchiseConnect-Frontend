@@ -21,6 +21,20 @@ import { Toast } from 'primereact/toast';
 import IssueIcon from '../../assets/issueIcon.jpg';
 import TicketIcon from '../../assets/ticketIcon.png';
 
+import { getRole } from '../../constants/LocalStorage'
+
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  where
+} from "firebase/firestore";
+
+import { firebaseDb } from '../../firebaseConfig';
+
 function SupportPage() {
   const [isShow, setIsShow] = useState(false);
   const [activeIndex, setActiveIndex] = useState(1);
@@ -31,6 +45,10 @@ function SupportPage() {
   const [ticketList, setTicketList] = useState([]);
 
   const toast = useRef(null);
+
+  const chatsRef = collection(firebaseDb, "QueryChats");
+
+  const [role, setRole] = useState(null)
 
 
   const toggle = () => {
@@ -60,6 +78,8 @@ function SupportPage() {
 
   useLayoutEffect(() => {
     getAllTicket();
+    const currentRole = getRole();
+    setRole(currentRole)
   }, [])
 
   useEffect(() => {
@@ -80,8 +100,16 @@ function SupportPage() {
     })
       .then((response) => {
         console.log(response);
-        ToastMessage(true, response.data.value.response, toast);
+        
         setChangeState(1);
+        addDoc(chatsRef, {
+          message : data.ticketDescription,
+          type: role,
+          createdAt: serverTimestamp(),
+          queryId: response.data.value.responseId
+        });
+
+        ToastMessage(true, response.data.value.response, toast);
         // Clear the form data
         reset({
           ticketTitle: "",

@@ -28,7 +28,7 @@ const MainFilterComponent = ({ franchises, setCopyFranchises }) => {
     const [selectedCategories, debouncedValue, setSelectedCategories] = useDebounce([], 400);
     // const [selectedCategories, setSelectedCategories] = useState(null);
     const [checkboxData, setCheckboxData] = useState(false);
-    const [rangeInvestmentSelectorData, setRangeInvestmentSelectorData] = useState({ minValue: 0, maxValue: 10000000 });
+    const [rangeInvestmentSelectorData, setRangeInvestmentSelectorData] = useState({ minValue: 0, maxValue: 1000000000 });
     const [rangeSpaceSelectorData, setRangeSpaceSelectorData] = useState({ minValue: 200, maxValue: 100000 });
 
     const franchiseCategories = getUniqueFranchiseIndustries(franchises);
@@ -43,8 +43,6 @@ const MainFilterComponent = ({ franchises, setCopyFranchises }) => {
     }
 
     const handleFilterApply = () => {
-        console.log(checkboxData)
-        console.log(selectedCategories)
 
         const filteredFranchises = franchises.filter((franchise) => {
             const {
@@ -52,7 +50,11 @@ const MainFilterComponent = ({ franchises, setCopyFranchises }) => {
                 franchiseSpace,
                 franchiseCustomizedOption,
             } = franchise.franchise;
-
+            
+            // Filter based on checkboxData
+            if (checkboxData && !franchiseCustomizedOption) {
+                return false;
+            }
             // Filter based on selectedCategories
             if (
                 selectedCategories.length > 0 &&
@@ -60,31 +62,23 @@ const MainFilterComponent = ({ franchises, setCopyFranchises }) => {
             ) {
                 return false;
             }
-
             // Filter based on rangeInvestmentSelectorData
             if (
-                franchiseInvestment < rangeInvestmentSelectorData.minValue ||
-                franchiseInvestment > rangeInvestmentSelectorData.maxValue
+                parseInt(franchiseInvestment) < rangeInvestmentSelectorData.min ||
+                parseInt(franchiseInvestment) > rangeInvestmentSelectorData.max
             ) {
                 return false;
             }
-
             // Filter based on rangeSpaceSelectorData
             if (
-                franchiseSpace < rangeSpaceSelectorData.minValue ||
-                franchiseSpace > rangeSpaceSelectorData.maxValue
+                parseInt(franchiseSpace) < rangeSpaceSelectorData.min ||
+                parseInt(franchiseSpace) > rangeSpaceSelectorData.max
             ) {
                 return false;
             }
-
-            // Filter based on checkboxData
-            if (checkboxData && !franchiseCustomizedOption) {
-                return false;
-            }
-
             return true;
         });
-
+        console.log(filteredFranchises)
         setCopyFranchises( filteredFranchises
           );
     };
@@ -114,15 +108,15 @@ const MainFilterComponent = ({ franchises, setCopyFranchises }) => {
                 <div className="form-group flex items-center gap-1 p-5   rounded mt-2 flex-col lg:flex-row ">
                     <label>Investment (INR):</label>
                     <RangeSelectorFilter min={0}
-                        max={1000000}
+                        max={10000000}
                         onChange={handleRangeInvestmentSelectorChange}
                         className="inline-block relative"
                     />
                 </div>
                 <div className='form-group flex items-center gap-1 p-5 mt-5 lg:mt-2 rounded flex-col lg:flex-row '>
                     <label>Space (sq. ft):</label>
-                    <RangeSelectorFilter min={200}
-                        max={100000}
+                    <RangeSelectorFilter min={100}
+                        max={10000}
                         onChange={handleRangeSpaceSelectorChange} />
                 </div>
                 <div className='form-group flex items-center gap-1 p-5   rounded mt-5 lg:mt-2 '>

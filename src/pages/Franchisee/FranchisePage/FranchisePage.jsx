@@ -22,7 +22,7 @@ import { Carousel } from 'primereact/carousel';
 
 
 function FranchisePage() {
-    const [reviews, setReviews] = useState([]);
+    const [reviews, setReviews] = useState(null);
     const [isWishlisted,setWishlist] = useState(false);
     const [franchise, setFranchise] = useState();
 
@@ -30,6 +30,8 @@ function FranchisePage() {
     
     const id = useParams();
 
+    
+      
 
     useEffect(()=>{
         const reviewsApi = [{
@@ -45,27 +47,24 @@ function FranchisePage() {
         setReviews(reviewsApi);
         const getResponse = async () => {
             try {
-                if(sessionStorage.getItem("reviews") !== null)
-                {
-                    const franchiseReviews = sessionStorage.getItem("reviews");
-                    setReviews(franchiseReviews);
-                    return;
-                }
-                const franchiseDetail = await GetFranchiseDetails("Chai Kings");
-                const business_id = franchiseDetail.data.data[0]['business_id'];
-                const franchiseReviews = await GetFranchiseReview(business_id);
-                setReviews(franchiseReviews.data.data);
-                sessionStorage.setItem("reviews", franchiseReviews);
+             
+                  const franchiseDetail = await GetFranchiseDetails("Chai Kings");
+                  const business_id = franchiseDetail.data.data[0]['business_id'];
+                //   sessionStorage.setItem(id.id, business_id);
+
+              const franchiseReviews = await GetFranchiseReview(business_id);
+              setReviews(franchiseReviews.data.data);
+            //   console.log(franchiseReviews.data.data)
+              
             } catch (error) {
-                console.error(error);
+              console.error(error);
             }
-        }
+          }
         // getResponse(); // TODO : GET REVIEWS -> NEED TO RE-REGISTER IN THE RAPIDAPI
         GetFranchiseById(id.id)
         .then((response) => {
             setFranchise(response.data);
             setLoading(false);
-            console.log(response.data)
         })
         .catch((error) => {
             console.error(error);
@@ -107,20 +106,19 @@ function FranchisePage() {
         <section>
             <ServiceCard franchiseService={franchise.frachiseServiceList}/>
         </section>
-
+        { reviews !== null && 
         <section className='p-5 w-fit'>
             <h1 className='text-3xl font-semibold'>Reviews</h1>
             <div className="w-auto flex flex-col gap-3 sm:flex-row pt-5">
-               {
+               {   reviews.length > 0 &&
                 reviews.map((review,index) => {
                    return <ReviewCardComponent key={index} review={review} />
 
                 })
                }
             </div>
-            {/* Review Section */}
         </section>
-
+        }
         </section> }
         
       </FranchiseeLayout>

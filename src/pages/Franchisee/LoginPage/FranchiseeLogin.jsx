@@ -10,6 +10,7 @@ import { Button } from 'primereact/button';
 
 import { Toast } from "primereact/toast";
 import ToastMessage from "../../../components/ToastComponent/Toast";
+import jwtDecode from "jwt-decode";
 
 
 
@@ -29,12 +30,18 @@ const FranchiseeLogin = () => {
     FranchiseeSignIn(data)
     .then(res => {
       setErrorMessage(null);
-      setRole("franchisee");
       setAuthToken(res.data.value);
+      const token = jwtDecode(res.data.value);
+      const role = token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+      setRole(role.toLowerCase());
+   
       ToastMessage(true, "Login Successful", toast);
       setLoading(false)
       setTimeout(() => {
-        navigate("/franchisee/home");
+        if(role === 'Admin')
+          navigate("/admin/dashboard");
+        else
+          navigate("/franchisee/home");
       },2000)
       reset();
     })
@@ -63,12 +70,12 @@ const FranchiseeLogin = () => {
     </section>
     <section className="w-full h-full md:w-1/2 shadow-xl flex flex-col items-center px-20 pt-5">
       <div className="mt-36 space-y-5 flex flex-col items-start">
-        <div>
+        {/* <div>
           <p className="font-extrabold text-xl font-[Mukta]">Hey, hello 👋</p>
           <p className="font-extralight text-sm">
             Enter the appropriate information used while registering!
           </p>
-        </div>
+        </div> */}
         <form onSubmit={
           handleSubmit(onSubmit)
         }

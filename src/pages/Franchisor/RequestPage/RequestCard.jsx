@@ -71,7 +71,8 @@ function RequestCard(props) {
         UpdateRequest(data)
             .then((response) => {
                 console.log(response)
-                navigate('/franchisor/request');
+                // navigate('/franchisor/request');
+                window.location.reload();
                 ToastMessage(true, response.data.value.response, toast);
             })
             .catch((error) => {
@@ -80,6 +81,7 @@ function RequestCard(props) {
     }
 
     const deny = () => {
+        console.log("here");
         const data = {
             franchiseRequestId: request.franchiseRequest.franchiseRequestId,
             isRequestStatus: "Rejected"
@@ -113,7 +115,7 @@ function RequestCard(props) {
             message: 'Do you want to deny this request?',
             header: 'Deny Confirmation',
             icon: 'pi pi-info-circle',
-            deny
+            accept: () => deny()
         });
     };
 

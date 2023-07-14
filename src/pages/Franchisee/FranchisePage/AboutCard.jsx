@@ -29,6 +29,17 @@ import {CreateRequest} from '../../../api/Franchisee/FranchiseApi';
 
 import  { parseGrpcErrorMessage } from '../../../components/ErrorComponent/ErrorComponent';
 
+import {getRole} from '../../../constants/LocalStorage'
+
+import {
+    addDoc,
+    collection,
+    query,
+    serverTimestamp,
+} from "firebase/firestore";
+
+import { firebaseDb } from '../../../firebaseConfig';
+
 
 function AboutCard({ franchise }) {
 
@@ -45,6 +56,8 @@ function AboutCard({ franchise }) {
     })
 
     const {  addToWishlist,  isAddedToWishlist } = useContext(WishlistContext);
+
+    const chatsRef = collection(firebaseDb, "chats");
 
     const [visible, setVisible] = useState(false);
 
@@ -76,10 +89,24 @@ function AboutCard({ franchise }) {
     }
 
     const callCreateRequest = (data) => {
+        let requestBody = `Franchise Name : ${franchiseDetail.franchiseName}
+        \nInvestment Budget: ${data.investmentBudget}
+        \nSpace Budget: ${data.space}\n`;
+
+        const role = getRole();
         CreateRequest(data)
         .then((response) => {
-            console.log(response);
+            addDoc(chatsRef, {
+                message : requestBody,
+                type: role,
+                createdAt: serverTimestamp(),
+                conversationId: response.data.value.conversionId
+              });
             ToastMessage(true,response.data.value.response, toast);
+            setUserData({
+                investment : "",
+                space : ""
+            });
         })
         .catch((error) => {
             console.error(error);

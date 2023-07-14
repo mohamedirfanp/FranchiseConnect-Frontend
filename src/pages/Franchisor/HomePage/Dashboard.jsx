@@ -65,6 +65,7 @@ function Dashboard() {
                       <LineChart franchiseRequestList={franchiseData} />
                     </>
                   }
+                  
 
                 </section>
               </article>

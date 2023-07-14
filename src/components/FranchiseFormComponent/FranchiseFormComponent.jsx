@@ -119,6 +119,9 @@ export default function HorizontalLinearStepper() {
   const handleFormSubmit = () => {
     setLoading(true);
     formData.franchise.franchisePreferredExpansionLocation = formData.franchise.franchisePreferredExpansionLocation.join(',')
+    formData.franchise.franchiseInvestment = `${formData.franchise.franchiseInvestment}`
+    formData.franchise.franchiseFee  = `${formData.franchise.franchiseFee}`
+    formData.franchise.franchiseSpace = `${formData.franchise.franchiseSpace}`
     CreateFranchise(formData)
     .then((response) => {
         console.log(response);

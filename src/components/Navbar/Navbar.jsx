@@ -65,6 +65,13 @@ function Navbar(props) {
                     </NavLink>
                     }
                     {!isAdmin && <ProfileComponent />}
+                    {isAdmin && <button className='border border-red-500 rounded-full hover:bg-red-500' onClick={() => {
+                        Logout();
+                        navigate("/");
+                    }}>
+                        <i className='pi pi-power-off p-2'></i>
+                    </button>
+}
                     
                 </div>
                 {
@@ -108,6 +115,11 @@ function Navbar(props) {
                                 }}>Logout</button>
                                 
                                 </>}
+
+                                {isAdmin &&  <button className="block p-4 hover:bg-blue-300 w-full text-start" onClick={() => {
+                                    Logout();
+                                    navigate("/");
+                                }}>Logout</button>}
 
 
                             </div>

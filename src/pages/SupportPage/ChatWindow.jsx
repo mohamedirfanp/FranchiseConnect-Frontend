@@ -8,6 +8,9 @@ import { FileUpload } from 'primereact/fileupload';
 
 import { ProgressBar } from 'primereact/progressbar';
 
+import TicketIcon from '../../assets/ticketIcon.png';
+import IssueIcon from '../../assets/issueIcon.jpg'; 
+
 // Firestore import
 import {
   addDoc,
@@ -315,7 +318,7 @@ const ChatWindow = ({ ticket, setCurrentTicket, ticketList }) => {
             </button>
           </div>
           <div className={`w-9 h-9 rounded-full flex font-bold items-center justify-center ${getColor("Ticket")}`}>
-            {ticket.currentTicket.queryTitle[0].toUpperCase()}
+            {ticket.currentTicket.queryType === 'issue' ? <img src={IssueIcon} /> : <img src={TicketIcon} className='rounded-full' />}
           </div>
           <span className='text-lg font-bold'>{ticket.currentTicket.queryTitle}</span>
         </div>

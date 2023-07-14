@@ -32,13 +32,13 @@ function WishlistPage() {
     getWishlist();
   }, []);
 
-  const handleDelete = async (wishlistId) => {
+  const handleDelete = async (data) => {
     try {
-      const response = await RemoveWishlist(wishlistId);
+      const response = await RemoveWishlist(data.wishlistId);
       if (!response) return;
       ToastMessage(true, response.data.value.response, toast);
-      setFavourites((prevFavourites) => prevFavourites.filter((favourite) => favourite.wishlistId !== wishlistId));
-      removeWishlist(`${wishlistId}`);
+      setFavourites((prevFavourites) => prevFavourites.filter((favourite) => favourite.wishlistId !== data.wishlistId));
+      removeWishlist(`${data.franchiseId}`);
     } catch (error) {
       console.error(error);
     }
@@ -84,7 +84,11 @@ function WishlistPage() {
                       </div>
                       <div className='h-full flex justify-center items-center'>
                         <span className='hover:cursor-pointer h-full'>
-                          <i onClick={() => handleDelete(favourite.wishlistId)} className='pi pi-trash' style={{ color: 'red' }}></i>
+                          <i onClick={() => handleDelete({
+                            franchiseId : favourite.franchise.franchiseId,
+                            wishlistId : favourite.wishlistId
+                          }
+                            )} className='pi pi-trash' style={{ color: 'red' }}></i>
                         </span>
                       </div>
                     </div>

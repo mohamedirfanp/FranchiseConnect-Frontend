@@ -66,7 +66,7 @@ function NotificationCard() {
 
 		onSnapshot(queryMessage, (snapshot) => {
 			const chatDocs = snapshot.docs.map((doc) => doc.data());
-			const lastChat = chatDocs[0];
+			const lastChat = chatDocs[0] !== undefined ? chatDocs[0] : 'No Message';
 
 			setConversations((prevConversations) =>
             {

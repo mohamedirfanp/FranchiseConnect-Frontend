@@ -242,10 +242,11 @@ function AccountComponent({ role, setShowFranchise }) {
                                     {isEditing ? (
                                         <Button label='Save'  onClick={handleSaveClick} />
                                     ) : (
-                                        <Button label='Edit' className='h-full' icon='pi pi-pencil' onClick={handleEditClick} />
+                                        <ButtonComponent text={'Edit'}  onClick={handleEditClick} />
                                     )}
                                     <ButtonComponent text={'Change Password'} onClick={() => setVisible(true)} />
-                                    <ButtonComponent text={'Show Franchise'} onClick={() => setShowFranchise((prevState) => !prevState)} />
+
+                                    {role === 'franchisor' && <ButtonComponent text={'Show Franchise'} onClick={() => setShowFranchise((prevState) => !prevState)} />}
                                     
                                 </div>
                             </div>
