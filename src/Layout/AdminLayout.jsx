@@ -9,7 +9,7 @@ const routerConfig = [
     name: "Dashboard",
   },
   {
-    pathname: "/query",
+    pathname: "/admin/query",
     name: "Tickets",
   },
 ];
@@ -19,7 +19,7 @@ const routerConfig = [
 const AdminLayout = (props) => {
   return (
 
-      <div className="w-full h-screen lg:overflow-hidden bg-slate-200">
+      <div className="w-full h-screen overflow-hidden bg-slate-200">
       <Navbar routerConfig={routerConfig} isFavourite={true} isAdmin={true}/>
       <div className="flex w-full h-[90%] overflow-auto">
 

@@ -11,7 +11,7 @@ import { Dialog } from 'primereact/dialog';
 
 import { FileUpload } from 'primereact/fileupload';
 
-import { GetTicketForAdmin, CloseTicket } from '../../api/SupportApi/SupportApi'
+import { GetTicketForAdmin, CloseTicket } from '../../api/AdminApi/adminApi'
 
 
 import TicketIcon from '../../assets/ticketIcon.png';
@@ -362,7 +362,7 @@ function QueryPage() {
 
     const AdminContent = (
         <div className='w-full h-full flex'>
-            <div className='names w-[15%] md:w-[30%] h-full border-r border-black bg-[#dcd9d9]  text-white'>
+            <div className='names w-[15%] md:w-[30%] h-full overflow-auto border-r border-black bg-[#dcd9d9]  text-white'>
                 {queries &&
                     queries.map((con, index) => (
                         <div className='border-b border-black pt-2 pb-2 pl-2 pr-2 hover:bg-[#b5b2b2]'
@@ -471,12 +471,17 @@ function QueryPage() {
                                                 className='w-full flex justify-start'>
                                                 <span className='w-3/4 md:w-1/2 flex justify-start'>
                                                     {
-                                                        (chat.message.startsWith('https')) ? <div className="aspect-w-16 aspect-h-9">
+                                                        (chat.message.startsWith('https')) ? <div className="relative p-0 bg-blue-500 text-white rounded-lg rounded-tr-[0%]">
+                                                        <div className="aspect-w-16 aspect-h-9">
                                                             <img src={
                                                                 `${chat.message
                                                                 }`
                                                             } alt="Image" className="object-contain overflow-hidden p-2" />
-                                                        </div> : <div className="flex items-start justify-end">
+                                                        </div>
+                                                        <div className="flex justify-end w-full px-2">
+                                                            <span className="block text-xs text-gray-300 mt-1">{getformattedTime(chat.createdAt)}</span>
+                                                        </div>
+                                                    </div> : <div className="flex items-start justify-end">
                                                             <div className="max-w-xs mx-1 my-2">
                                                                 <div className="relative p-0 bg-blue-500 text-white rounded-lg rounded-tl-[0%]">
                                                                     <span className="block p-2">{chat.message}</span>
