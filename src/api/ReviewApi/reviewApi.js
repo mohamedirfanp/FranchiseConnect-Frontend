@@ -6,20 +6,20 @@ export const GetFranchiseDetails = async (franchiseName) => {
         method: 'GET',
         url: 'https://local-business-data.p.rapidapi.com/search',
         params: {
-            query: franchiseName,
-            limit: '1',
-            lat: '37.359428',
-            lng: '-121.925337',
-            zoom: '13',
-            language: 'en',
-            region: 'in',
-            fields: 'business_id'
+          query: `${franchiseName}, India`,
+          limit: '1',
+          lat: '13.0827',
+          lng: '80.2707',
+          zoom: '13',
+          language: 'en',
+          region: 'in',
+          fields: 'business_id'
         },
         headers: {
-            'X-RapidAPI-Key': '25a48a4641mshdce740cd5a28a22p1662d9jsne44a9c27f6b7',
-            'X-RapidAPI-Host': 'local-business-data.p.rapidapi.com'
+          'X-RapidAPI-Key': '073cda2538msh15be656d1aa0693p191568jsn657482517cd6',
+          'X-RapidAPI-Host': 'local-business-data.p.rapidapi.com'
         }
-    };
+      };
 
 
     return axios.request(options);
@@ -33,13 +33,13 @@ export const GetFranchiseReview = async (businessId) => {
         url: 'https://local-business-data.p.rapidapi.com/business-reviews',
         params: {
             business_id: `${businessId}`,
-            limit: '8',
+            limit: '5',
             region: 'in',
             language: 'en'
         },
         headers: {
-            'X-RapidAPI-Key': '25a48a4641mshdce740cd5a28a22p1662d9jsne44a9c27f6b7',
-            'X-RapidAPI-Host': 'local-business-data.p.rapidapi.com'
+          'X-RapidAPI-Key': '073cda2538msh15be656d1aa0693p191568jsn657482517cd6',
+          'X-RapidAPI-Host': 'local-business-data.p.rapidapi.com'
         }
     };
     

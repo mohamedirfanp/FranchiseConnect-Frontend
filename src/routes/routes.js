@@ -12,13 +12,17 @@ import FranchisorRegister from "../pages/Franchisor/RegisterPage/FranchisorRegis
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import WishlistPage from "../pages/Franchisee/WishlistPage/WishlistPage";
 import RequestPage from "../pages/Franchisor/RequestPage/RequestPage";
+
 import PrivateFranchiseeRoute from "./PrivateFranchiseeRoute";
 import PrivateFranchisorRoute from "./PrivateFranchisorRoute";
+import PrivateAdminRoute from './PrivateAdminRoute';
+
 import ConnectPage from "../pages/ConnectPage/ConnectPage";
 import SupportPage from "../pages/SupportPage/SupportPage";
 import AccountPage from "../pages/AccountPage/AccountPage";
 // import Dashboard from '../pages/AdminPage/Dashboard';
 import QueryPage from "../pages/AdminPage/QueryPage";
+import AdminDashboard from "../pages/AdminPage/AdminDashboard";
 
 
 export const routes = createBrowserRouter([
@@ -99,12 +103,17 @@ export const routes = createBrowserRouter([
             <ConnectPage />
         </PrivateFranchisorRoute>
     },
-    // {
-    //     path: "/admin/dashboard",
-    //     element: <Dashboard />
-    // },
     {
-        path: "/query",
-        element: <QueryPage />
+        path: "/admin/dashboard",
+
+        element: <PrivateAdminRoute>
+            <AdminDashboard />
+        </PrivateAdminRoute>
+    },
+    {
+        path: "/admin/query",
+        element: <PrivateAdminRoute>
+            <QueryPage />
+        </PrivateAdminRoute>
     }
 ]) 

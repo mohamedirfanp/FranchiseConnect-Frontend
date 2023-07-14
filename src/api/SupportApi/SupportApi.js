@@ -16,10 +16,3 @@ export const GetTicketForUser = async () => {
 //     return axiosInstance.get("/franchise/franchise-exist");
 // }
 
-export const GetTicketForAdmin = async () => {
-    return axios.get(`${API_BASE_URL}/chat/all/tickets`);
-}
-
-export const CloseTicket = async (queryId) => {
-    return axios.delete(`${API_BASE_URL}/chat/close/Ticket/${queryId}`);
-}
